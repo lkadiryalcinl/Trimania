@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -10,19 +10,23 @@ import HomeScreen from './screens/Home/HomeScreen'
 const Stack = createNativeStackNavigator()
 
 const AuthStack = () => {
-  return(
-    <Stack.Navigator>
-        <Stack.Screen name='Login' component={LoginScreen} />
-        <Stack.Screen name='Register' component={RegisterScreen} />
-      </Stack.Navigator>
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown:false
+    }}>
+      <Stack.Screen name='Login' component={LoginScreen} />
+      <Stack.Screen name='Register' component={RegisterScreen} />
+    </Stack.Navigator>
   )
 }
 
 const MainStack = () => {
-  return(
-    <Stack.Navigator>
-        <Stack.Screen name='Home' component={HomeScreen} />
-      </Stack.Navigator>
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown:false
+    }}>
+      <Stack.Screen name='Home' component={HomeScreen} />
+    </Stack.Navigator>
   )
 }
 
@@ -44,7 +48,7 @@ const Router = () => {
 
 
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       {user ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   )

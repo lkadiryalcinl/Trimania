@@ -4,7 +4,7 @@ import { showMessage } from 'react-native-flash-message'
 import { getFirebaseAuthErrorMessage, getFirebaseFirestoreErrorMessage } from './error'
 
 const createUser = (data) => {
-
+    
     auth()
         .createUserWithEmailAndPassword(data.email, data.password)
         .then(() => {
@@ -29,5 +29,7 @@ const createUser = (data) => {
         })
 
 }
+
+
 
 export default createUser;
