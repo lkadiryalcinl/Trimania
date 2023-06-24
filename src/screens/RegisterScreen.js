@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions,KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions } from 'react-native'
 import React from 'react'
 
 import Button from '../components/CustomButton'
@@ -13,13 +13,13 @@ import createUser from '../firebase/createUser'
 const RegisterScreen = ({ navigation }) => {
 
   return (
-    <KeyboardAvoidingView 
+    <View 
     style={styles.container}
-    behavior={'height'}
     >
       <View style={styles.top_container}>
         <Image source={require('../assets/images/TriviaLogo.png')} style={styles.image} />
       </View>
+
       <View style={styles.bottom_container}>
         <Formik
           initialValues={{ username: '', email: '', password: '', confirm: '' }}
@@ -54,7 +54,7 @@ const RegisterScreen = ({ navigation }) => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                   secret={true}
-                  icon={{ name: 'key', size: 28, color: 'grey' }}
+                  icon={{ name: 'key', size: 25, color: 'grey' }}
 
                 />
                 {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
@@ -65,7 +65,7 @@ const RegisterScreen = ({ navigation }) => {
                   onBlur={handleBlur('confirm')}
                   value={values.confirm}
                   secret={true}
-                  icon={{ name: 'key', size: 28, color: 'grey' }}
+                  icon={{ name: 'key', size: 25, color: 'grey' }}
 
                 />
                 {touched.confirm && errors.confirm && <Text style={styles.error}>{errors.confirm}</Text>}
@@ -80,7 +80,7 @@ const RegisterScreen = ({ navigation }) => {
         </Formik>
       </View>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Login')}><Text style={styles.text}>Already have an account ?</Text></TouchableOpacity>
-    </KeyboardAvoidingView>
+    </View>
   )
 }
 

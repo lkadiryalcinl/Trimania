@@ -1,7 +1,4 @@
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import { showMessage } from 'react-native-flash-message'
-import { getFirebaseAuthErrorMessage, getFirebaseFirestoreErrorMessage } from './error'
 
 const findUserById = async(uid) => {
 

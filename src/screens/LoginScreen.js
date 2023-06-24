@@ -13,8 +13,8 @@ import { signInValidationSchema } from '../utils/validations'
 const LoginScreen = ({ navigation }) => {
 
   return (
-    <View 
-    style={styles.container}
+    <View
+      style={styles.container}
     >
       <View style={styles.top_container}>
         <Image source={require('../assets/images/TriviaLogo.png')} style={styles.image} />
@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                   secret={true}
-                  icon={{ name: 'key', size: 28, color: 'grey' }}
+                  icon={{ name: 'key', size: 25, color: 'grey' }}
 
                 />
                 {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bottom_top_container: {
-    flex:2,
+    flex: 2,
   },
   bottom_bottom_container: {
-    flex: 3,
+    flex: 2.5,
     justifyContent: 'flex-start'
   },
   image: {

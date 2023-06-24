@@ -10,7 +10,6 @@ const createUser = (data) => {
         .then(() => {
             firestore().collection('Users').doc(auth().currentUser?.uid).set({
                 username: data.username,
-                score: 0,
             }).then(() => {
                 console.log('collection updated successfully')
             }).catch(err => {

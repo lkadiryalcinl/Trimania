@@ -19,6 +19,8 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
             secureTextEntry={passEntry}
             value={value}
             onChangeText={onChangeText}
+            placeholderTextColor={'#D4D4D4'}
+            autoCapitalize='none'
           />
         </View>
 
@@ -52,5 +54,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width / 1.15,
     elevation: 20,
     shadowColor: '#52006A',
+    color:colors.black
   }
 })
