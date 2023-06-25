@@ -38,13 +38,16 @@ const changeIcon = ({ modalVisible, setModalVisible }) => {
       {selectedIcon === item?<Icon name='check' size={24} color={colors.ac} style={styles.check_icon_style}/>:null}
     </TouchableOpacity>
   );
-
+  
+  const toggleModal = () => setModalVisible(!modalVisible)
+  
   return (
     <View style={styles.container}>
       <Modal
         isVisible={modalVisible}
-        onBackButtonPress={() => setModalVisible(!modalVisible)}
-        onBackdropPress={() => setModalVisible(!modalVisible)}
+        onBackButtonPress={toggleModal}
+        onBackdropPress={toggleModal}
+        onSwipeComplete={toggleModal}
         style={styles.modal}
       >
         <View style={styles.inside_modal}>
@@ -55,7 +58,7 @@ const changeIcon = ({ modalVisible, setModalVisible }) => {
             numColumns={3}
             showsVerticalScrollIndicator={false}
           />
-          <Button label={'Edit'} icon={{name:'edit',size:18,color:colors.fg}} onPress={(() => handleSubmit(selectedIcon))}/>
+          <Button label={'Edit'} icon={{name:'edit',size:18,color:colors.fg}} onPress={(selectedIcon?() => handleSubmit(selectedIcon):() => {})}/>
         </View>
       </Modal>
     </View>
@@ -69,7 +72,6 @@ const screen = Dimensions.get('screen')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   modal: {
     justifyContent: 'flex-end',

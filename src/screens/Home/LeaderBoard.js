@@ -6,7 +6,7 @@ import colors from '../../utils/colors'
 import getAllUsers from '../../firebase/getAllUsers'
 import LeaderBoardFields from './LeaderBoardFields'
 
-const LeaderBoard = () => {
+const LeaderBoard = ({user}) => {
   const [allUsers, setAllUsers] = useState([])
   const [loading, setLoading] = useState(false)
 

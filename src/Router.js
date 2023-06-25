@@ -3,9 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import auth from '@react-native-firebase/auth'
+
+//Auth Stack
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen';
+
+//Main Stack
 import HomeScreen from './screens/Home/HomeScreen'
+import QuestionsScreen from './screens/Questions/QuestionsScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -26,6 +31,7 @@ const MainStack = () => {
       headerShown:false
     }}>
       <Stack.Screen name='Home' component={HomeScreen} />
+      <Stack.Screen name='Questions' component={QuestionsScreen} />
     </Stack.Navigator>
   )
 }

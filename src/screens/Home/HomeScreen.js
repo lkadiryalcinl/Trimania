@@ -13,7 +13,7 @@ import getAvatar from '../../utils/getAvatar'
 import findUserRank from '../../firebase/findUserRank'
 import ChangeIcon from './changeIcon'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [user, setUser] = useState([])
   const [loading, setLoading] = useState(false)
   const [userRank, setUserRank] = useState()
@@ -81,11 +81,11 @@ const HomeScreen = () => {
 
 
       <View style={styles.mid_container}>
-        <LeaderBoard />
+        <LeaderBoard icon={user.icon}/>
       </View>
 
       <View style={styles.bottom_container}>
-        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} />
+        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => navigation.replace('Questions')}/>
       </View>
 
     </View>
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
   top_container: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    marginHorizontal:8
   },
   mid_container: {
     flex: 4,
