@@ -11,4 +11,6 @@ const Question = () => {
 
 export default Question
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  
+})

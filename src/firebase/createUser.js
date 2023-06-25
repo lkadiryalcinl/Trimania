@@ -4,13 +4,12 @@ import { showMessage } from 'react-native-flash-message'
 import { getFirebaseAuthErrorMessage, getFirebaseFirestoreErrorMessage } from './error'
 
 const createUser = (data) => {
-
+    
     auth()
         .createUserWithEmailAndPassword(data.email, data.password)
         .then(() => {
             firestore().collection('Users').doc(auth().currentUser?.uid).set({
                 username: data.username,
-                score: 0,
             }).then(() => {
                 console.log('collection updated successfully')
             }).catch(err => {
@@ -29,5 +28,7 @@ const createUser = (data) => {
         })
 
 }
+
+
 
 export default createUser;

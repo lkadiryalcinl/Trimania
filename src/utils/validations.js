@@ -11,14 +11,9 @@ const Error = {
 }
 
 
+
 const authValidations = {
         
-        username: yup
-        .string(Error['string'])
-        .min(8,({min}) => Error['minCharacter'](min))
-        .max(16,({max}) => Error['maxCharacter'](max))
-        .required(Error['required']),
-
         email: yup
         .string(Error['string'])
         .email(Error['email'])
@@ -30,11 +25,30 @@ const authValidations = {
         .max(16,({max}) => Error['maxCharacter'](max))
         .required(Error['required']),
 
+}
+
+const signIn = {
+    ...authValidations,
+}
+
+const createUser = {
+    ...authValidations,
+    username: yup
+        .string(Error['string'])
+        .min(8,({min}) => Error['minCharacter'](min))
+        .max(16,({max}) => Error['maxCharacter'](max))
+        .required(Error['required']),
+        
         confirm: yup.string(Error['string'])
         .oneOf([yup.ref('password'), null], 'Passwords not match.')
 
 }
 
-const authValidationSchema = yup.object().shape(authValidations);
+const createUserValidationSchema = yup.object().shape(createUser);
+const signInValidationSchema = yup.object().shape(signIn);
 
-export default authValidationSchema
+
+export {
+    createUserValidationSchema,
+    signInValidationSchema
+}
