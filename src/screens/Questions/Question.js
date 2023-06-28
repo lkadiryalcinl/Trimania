@@ -89,7 +89,7 @@ const Question = ({ category, question, correct_answer, incorrect_answers, type,
         </View>
         <View style={styles.under_category_container}>
           <View style={styles.under_category}>
-            <Icon name='crown' size={24} color={colors.fg} />
+            <Icon name='crown' size={24} color={'gold'} />
             <Text style={styles.text_category}>{score}</Text>
           </View>
           <View style={styles.under_category}>

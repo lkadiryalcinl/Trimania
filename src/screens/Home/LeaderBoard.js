@@ -30,6 +30,7 @@ const LeaderBoard = ({user}) => {
       <View style={styles.bottom}>
         {loading ? <ActivityIndicator size={100} style={styles.indicator} color={colors.ac}/> :
           <FlatList
+          showsVerticalScrollIndicator={false}
             data={allUsers}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}

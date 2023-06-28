@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { ActivityIndicator } from 'react-native'
 import colors from '../utils/colors'
  
-const CustomButton = ({ onPress, icon, loading, label,disabled }) => {
+const CustomButton = ({ onPress, icon, loading, label,disabled,additionalStyles }) => {
 
 
   return (
@@ -14,7 +14,7 @@ const CustomButton = ({ onPress, icon, loading, label,disabled }) => {
           
         />
         :
-        <View style={styles.inner_container}>
+        <View style={[styles.inner_container,additionalStyles?.inner_container]}>
           <>
           {
             icon 
@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     borderRadius:5,
     backgroundColor:colors.ac,
-    marginHorizontal:Dimensions.get('screen').width/4,
+    marginHorizontal:Dimensions.get('screen').width/8,
     padding:4,
     elevation: 20,
     shadowColor: '#52006A',
-    alignSelf:'center'
   },
   text:{
     color:colors.fg,

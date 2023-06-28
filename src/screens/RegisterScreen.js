@@ -1,5 +1,17 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions,ImageBackground } from 'react-native'
-import React from 'react'
+import { 
+  StyleSheet,
+  Dimensions,
+  Text, 
+  TouchableOpacity, 
+  View,
+  ImageBackground,
+  AppState
+} from 'react-native'
+
+import React,{
+  useEffect,
+  useRef
+} from 'react'
 
 import Button from '../components/CustomButton'
 import Input from '../components/CustomInput'
@@ -12,6 +24,31 @@ import createUser from '../firebase/createUser'
 
 const RegisterScreen = ({ navigation }) => {
 
+  const appState = useRef(AppState.currentState);
+  let formikRef = React.createRef();
+
+  useEffect(() => {
+    // AppState değişikliklerini dinleyen bir abonelik oluşturun
+    const appStateListener = AppState.addEventListener('change', handleAppStateChange);
+
+    // Cleanup fonksiyonunda aboneliği kaldırın
+    return () => {
+      appStateListener.remove();
+    };
+  }, []);
+
+  const handleAppStateChange = (nextAppState) => {
+    if (
+      appState.current.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      if (formikRef.current) {
+        formikRef.current.resetForm();
+      }
+    }
+    appState.current = nextAppState;
+  };
+
   return (
     <ImageBackground
       source={require('../assets/images/purple-blue-bg.jpg')}
@@ -20,6 +57,7 @@ const RegisterScreen = ({ navigation }) => {
     >
       <View style={styles.top_container}>
         <Formik
+          innerRef={formikRef}
           initialValues={{ username: '', email: '', password: '', confirm: '' }}
           validationSchema={createUserValidationSchema}
           onSubmit={async(values)=> await createUser(values)}
@@ -71,7 +109,7 @@ const RegisterScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.bottom}>
-                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }}/>
+                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles}/>
               </View>
             </>
           )}
@@ -116,5 +154,9 @@ const styles = StyleSheet.create({
     color: colors.warn,
     textAlign: 'center'
   },
-
+  additionalStyles:{
+    inner_container: {
+      marginHorizontal:Dimensions.get('screen').width/4
+    }
+  }
 })

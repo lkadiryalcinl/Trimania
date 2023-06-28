@@ -17,7 +17,7 @@ const LeaderBoardFields = () => {
                 <Text style={styles.text}>Username</Text>
             </View>
             <View style={styles.score}>
-                <Icon name='crown' size={24} color={colors.black}/>
+                <Icon name='crown' size={24} color={'gold'}/>
             </View>
         </View>
     )

@@ -1,5 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React,{useEffect} from 'react'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  ImageBackground
+} from 'react-native'
+
+import React,
+{
+  useEffect
+} from 'react'
+
 import colors from '../utils/colors'
 import Button from '../components/CustomButton'
 import Lottie from 'lottie-react-native'
@@ -24,7 +34,10 @@ const Results = ({navigation,route}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+    style={styles.container}
+    source={require('../assets/images/purple-blue-bg.jpg')}
+    >
       <View style={styles.top}>
         <Text style={[styles.text,{color:colors.fg}]}>Well Done :)</Text>
       </View>
@@ -39,10 +52,10 @@ const Results = ({navigation,route}) => {
           <Text style={styles.text}>your score is : {score}</Text>
         </View>
         <View style={styles.button_container}>
-          <Button label={'Back Board'} icon={{name:'back' ,color:colors.fg,size:24}} onPress={handleFinish}/>
+          <Button label={'Back to Board'} icon={{name:'back' ,color:colors.fg,size:24}} onPress={handleFinish}/>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   )
 }
 
@@ -51,7 +64,6 @@ export default Results
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:colors.bg,
   },
   top:{
     flex:1,

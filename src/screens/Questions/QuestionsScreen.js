@@ -1,8 +1,15 @@
-import { StyleSheet, View, Button, FlatList, Alert,TouchableOpacity,BackHandler } from 'react-native'
+import { 
+  StyleSheet, 
+  View, 
+  FlatList, 
+  Alert,
+  BackHandler,
+  ImageBackground
+} from 'react-native'
+
 import React,{useState,useEffect,useRef} from 'react'
 import colors from '../../utils/colors'
 import Question from './Question';
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 const QuestionsScreen = ({ navigation, route }) => {
   const {data,user} = route.params
@@ -61,7 +68,11 @@ const QuestionsScreen = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={styles.outer_container}>
+    <ImageBackground 
+    style={styles.outer_container}
+    source={require('../../assets/images/purple-blue-bg.jpg')}
+    resizeMode='cover'
+    >
       <View style={styles.swiper_container}>
         <FlatList
           horizontal={true}
@@ -90,7 +101,7 @@ const QuestionsScreen = ({ navigation, route }) => {
       <View style={styles.ad}>
 
       </View>
-    </View>
+    </ImageBackground>
   )
 }
 
@@ -100,14 +111,13 @@ export default QuestionsScreen
 const styles = StyleSheet.create({
   outer_container: {
     flex: 1,
-    backgroundColor: colors.bg,
   },
 
   swiper_container: {
-    flex: 8,
+    flex: 16,
     margin:16
   },
   ad:{
-    flex:0.5
+    flex:1
   }
 })

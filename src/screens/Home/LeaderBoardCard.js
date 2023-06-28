@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     container:{
         height:Dimensions.get('screen').height/12,	
         backgroundColor:'#D4D4D4',
-        margin:5,
+        margin:6,
+        marginHorizontal:12,
         borderRadius:5,
         flexDirection:'row',
         paddingVertical:5

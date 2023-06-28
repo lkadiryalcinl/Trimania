@@ -1,5 +1,22 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ActivityIndicator, Alert, BackHandler } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import {
+  StyleSheet,
+  Dimensions,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+  BackHandler,
+  ImageBackground
+} from 'react-native'
+
+import React,
+{
+  useEffect,
+  useState
+} from 'react'
+
 import auth from '@react-native-firebase/auth'
 
 import Button from '../../components/CustomButton'
@@ -73,9 +90,13 @@ const HomeScreen = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+    style={styles.container}
+    resizeMode='cover'
+    source={require('../../assets/images/purple-blue-bg.jpg')}
+    >
       <TouchableOpacity onPress={signOutControl}>
-        <Icon name='logout' color={colors.ac} size={32} style={{ position: 'absolute', right: 16, top: 8 }} />
+        <Icon name='logout' color={colors.fg} size={32} style={{ position: 'absolute', right: 16, top: 8 }} />
       </TouchableOpacity>
 
       <View style={styles.top_container}>
@@ -104,11 +125,11 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.bottom_container}>
-        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setModalVisible2(!modalVisible2)} />
+        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setModalVisible2(!modalVisible2)} additionalStyles={styles.additionalStyles}/>
         <ChooseModal modalVisible={modalVisible2} setModalVisible={setModalVisible2} navigation={navigation} user={user} />
       </View>
 
-    </View>
+    </ImageBackground>
   )
 }
 
@@ -117,7 +138,6 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg
   },
   top_container: {
     flex: 1,
@@ -127,11 +147,9 @@ const styles = StyleSheet.create({
   },
   mid_container: {
     flex: 4,
-    backgroundColor: colors.bg
   },
   bottom_container: {
     flex: 1,
-    backgroundColor: colors.bg,
     justifyContent: 'center'
   },
   icon_container: {
@@ -152,7 +170,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: colors.black,
+    color: colors.fg,
     flexWrap: 'wrap'
   },
   image: {
@@ -165,5 +183,10 @@ const styles = StyleSheet.create({
     bottom: Dimensions.get('screen').height / 24,
     right: 6
   },
-  indicator: { position: 'absolute', top: 0, right: 0, left: 0, bottom: 0 }
+  indicator: { position: 'absolute', top: 0, right: 0, left: 0, bottom: 0 },
+  additionalStyles:{
+    inner_container: {
+      marginHorizontal:Dimensions.get('screen').width/4
+    }
+  }
 })

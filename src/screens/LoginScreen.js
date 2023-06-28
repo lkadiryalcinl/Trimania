@@ -1,5 +1,19 @@
-import { StyleSheet, Dimensions, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import React from 'react'
+import {
+  StyleSheet,
+  Dimensions,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  AppState
+} from 'react-native'
+
+import
+React, {
+  useEffect,
+  useRef
+} from 'react'
 
 import Button from '../components/CustomButton'
 import Input from '../components/CustomInput'
@@ -11,18 +25,43 @@ import signIn from '../firebase/signInUser'
 import { signInValidationSchema } from '../utils/validations'
 
 const LoginScreen = ({ navigation }) => {
+  const appState = useRef(AppState.currentState);
+  let formikRef = React.createRef();
+
+  useEffect(() => {
+    // AppState değişikliklerini dinleyen bir abonelik oluşturun
+    const appStateListener = AppState.addEventListener('change', handleAppStateChange);
+
+    // Cleanup fonksiyonunda aboneliği kaldırın
+    return () => {
+      appStateListener.remove();
+    };
+  }, []);
+
+  const handleAppStateChange = (nextAppState) => {
+    if (
+      appState.current.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      if (formikRef.current) {
+        formikRef.current.resetForm();
+      }
+    }
+    appState.current = nextAppState;
+  };
 
   return (
     <ImageBackground
       source={require('../assets/images/purple-blue-bg.jpg')}
       resizeMode="cover"
-      style={styles.container}
+      style={{ flex: 1 }}
     >
       <View style={styles.top_container}>
         <Image source={require('../assets/images/TriviaLogo.png')} style={styles.image} />
       </View>
       <View style={styles.bottom_container}>
         <Formik
+          innerRef={formikRef}
           initialValues={{ email: '', password: '', }}
           validationSchema={signInValidationSchema}
           onSubmit={signIn}
@@ -51,8 +90,11 @@ const LoginScreen = ({ navigation }) => {
                 />
 
               </View>
-              <View style={styles.bottom_bottom_container}>
-                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} />
+              <View style={
+                [styles.bottom_bottom_container,
+                (touched.email && errors.email) || (touched.password && errors.password) ? { ...styles.bottom_bottom_container, justifyContent: 'center' } : null
+                ]}>
+                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles}/>
               </View>
 
             </>
@@ -105,6 +147,12 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 16,
     color: colors.warn,
-    textAlign: 'center'
+    textAlign: 'center',
+    height: 24
   },
+  additionalStyles:{
+    inner_container: {
+      marginHorizontal:Dimensions.get('screen').width/4
+    }
+  }
 })
