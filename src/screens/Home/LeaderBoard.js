@@ -19,7 +19,7 @@ const LeaderBoard = ({user}) => {
     fetchUsers()
   }, [])
 
-  const renderItem = (item) => <LeaderBoardCard id={item.index + 1} icon={item.item.icon} score={item.item.score} username={item.item.username} />
+  const renderItem = (item) => <LeaderBoardCard id={item.index + 1} icon={item.item.icon} score={item.item.score} username={item.item.username} user={user} userID={item.item.userID}/>
 
   return (
     <View style={styles.container}>

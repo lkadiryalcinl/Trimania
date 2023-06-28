@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     padding:4,
     elevation: 20,
     shadowColor: '#52006A',
-    
+    alignSelf:'center'
   },
   text:{
     color:colors.fg,

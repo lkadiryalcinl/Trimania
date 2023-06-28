@@ -35,8 +35,8 @@ const createUser = {
     ...authValidations,
     username: yup
         .string(Error['string'])
-        .min(8,({min}) => Error['minCharacter'](min))
-        .max(16,({max}) => Error['maxCharacter'](max))
+        .min(4,({min}) => Error['minCharacter'](min))
+        .max(12,({max}) => Error['maxCharacter'](max))
         .required(Error['required']),
         
         confirm: yup.string(Error['string'])

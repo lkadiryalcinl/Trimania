@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, Dimensions,ImageBackground } from 'react-native'
 import React from 'react'
 
 import Button from '../components/CustomButton'
@@ -13,74 +13,72 @@ import createUser from '../firebase/createUser'
 const RegisterScreen = ({ navigation }) => {
 
   return (
-    <View 
-    style={styles.container}
+    <ImageBackground
+      source={require('../assets/images/purple-blue-bg.jpg')}
+      resizeMode="cover"
+      style={styles.container}
     >
       <View style={styles.top_container}>
-        <Image source={require('../assets/images/TriviaLogo.png')} style={styles.image} />
-      </View>
-
-      <View style={styles.bottom_container}>
         <Formik
           initialValues={{ username: '', email: '', password: '', confirm: '' }}
           validationSchema={createUserValidationSchema}
-          onSubmit={createUser}
+          onSubmit={async(values)=> await createUser(values)}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>
 
-              <View style={styles.bottom_top_container}>
+              <View style={styles.top}>
+                {touched.username && errors.username && <Text style={styles.error}>{errors.username}</Text>}
                 <Input
                   placeholder="Username"
                   onChangeText={handleChange('username')}
                   onBlur={handleBlur('username')}
                   value={values.username}
-                  icon={{ name: 'account', size: 28, color: 'grey' }}
+                  icon={{ name: 'account', size: 32, color: colors.fg }}
                 />
-                {touched.username && errors.username && <Text style={styles.error}>{errors.username}</Text>}
 
+                {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
                 <Input
                   placeholder="Email"
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
-                  icon={{ name: 'mail', size: 25, color: 'grey' }}
+                  icon={{ name: 'mail', size: 32, color: colors.fg }}
                 />
-                {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
 
+                {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
                 <Input
                   placeholder="Password"
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
                   secret={true}
-                  icon={{ name: 'key', size: 25, color: 'grey' }}
+                  icon={{ name: 'key', size: 32, color: colors.fg}}
 
                 />
-                {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
 
+                {touched.confirm && errors.confirm && <Text style={styles.error}>{errors.confirm}</Text>}
                 <Input
                   placeholder="Confirm"
                   onChangeText={handleChange('confirm')}
                   onBlur={handleBlur('confirm')}
                   value={values.confirm}
                   secret={true}
-                  icon={{ name: 'key', size: 25, color: 'grey' }}
+                  icon={{ name: 'key', size: 32, color: colors.fg }}
 
                 />
-                {touched.confirm && errors.confirm && <Text style={styles.error}>{errors.confirm}</Text>}
                 
               </View>
 
-              <View style={[styles.bottom_bottom_container,touched?{justifyContent:'center'}:null]}>
-                <Button label="Register" onPress={handleSubmit} />
+              <View style={styles.bottom}>
+                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }}/>
               </View>
             </>
           )}
         </Formik>
       </View>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Login')}><Text style={styles.text}>Already have an account ?</Text></TouchableOpacity>
-    </View>
+    </ImageBackground>
   )
 }
 
@@ -95,22 +93,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  bottom_container: {
-    flex: 1,
-  },
-  bottom_top_container: {
+  top: {
     flex:3,
     justifyContent:'center',
   },
-  bottom_bottom_container: {
-    flex:2,
-    justifyContent:'center',
-  },
-  image: {
-    width: Dimensions.get('screen').width / 1.15,
-    height: Dimensions.get('screen').height / 4,
-    resizeMode: 'contain',
-    alignSelf: 'center'
+  bottom: {
+    flex:1,
+    justifyContent:'flex-start',
   },
   text_container: {
     padding: 4,
@@ -119,8 +108,8 @@ const styles = StyleSheet.create({
     bottom: 0
   },
   text: {
-    fontSize: 16,
-    color: colors.black
+    fontSize: 18,
+    color: colors.fg
   },
   error: {
     fontSize: 16,

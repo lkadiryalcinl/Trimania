@@ -11,28 +11,36 @@ import RegisterScreen from './screens/RegisterScreen';
 //Main Stack
 import HomeScreen from './screens/Home/HomeScreen'
 import QuestionsScreen from './screens/Questions/QuestionsScreen';
+import ResultsScreen from './screens/Results';
+
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createNativeStackNavigator()
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown:false
-    }}>
-      <Stack.Screen name='Login' component={LoginScreen} />
-      <Stack.Screen name='Register' component={RegisterScreen} />
-    </Stack.Navigator>
+    <>
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name='Register' component={RegisterScreen} />
+      </Stack.Navigator>
+    </>
   )
 }
 
 const MainStack = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown:false
-    }}>
-      <Stack.Screen name='Home' component={HomeScreen} />
-      <Stack.Screen name='Questions' component={QuestionsScreen} />
-    </Stack.Navigator>
+    <>
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name='Home' component={HomeScreen} />
+        <Stack.Screen name='Questions' component={QuestionsScreen} />
+        <Stack.Screen name='Results' component={ResultsScreen} />
+      </Stack.Navigator>
+    </>
   )
 }
 
@@ -56,6 +64,7 @@ const Router = () => {
   return (
     <NavigationContainer >
       {user ? <MainStack /> : <AuthStack />}
+      <FlashMessage position='top' />
     </NavigationContainer>
   )
 }

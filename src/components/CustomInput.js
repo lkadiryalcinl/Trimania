@@ -9,7 +9,7 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
   return (
     <View styles={styles.container}>
       <View style={{ flexDirection: 'row' }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center',marginHorizontal:6 }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center',marginHorizontal:6,marginBottom:16 }}>
           {icon ? <Icon name={icon?.name} size={icon?.size} color={icon?.color} /> : null}
         </View>
         <View >
@@ -19,7 +19,7 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
             secureTextEntry={passEntry}
             value={value}
             onChangeText={onChangeText}
-            placeholderTextColor={'#D4D4D4'}
+            placeholderTextColor={'#555555'}
             autoCapitalize='none'
           />
         </View>
@@ -46,11 +46,12 @@ export default CustomInput
 
 const styles = StyleSheet.create({
   container: {
+    
   },
   textInput: {
     backgroundColor: colors.fg,
     borderRadius: 5,
-    marginBottom:8,
+    marginBottom:16,
     width: Dimensions.get('screen').width / 1.15,
     elevation: 20,
     shadowColor: '#52006A',
