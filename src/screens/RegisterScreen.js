@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
   error: {
     fontSize: 16,
-    color: colors.warn,
+    color: colors.fg,
     textAlign: 'center'
   },
   additionalStyles:{

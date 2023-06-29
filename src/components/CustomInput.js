@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: colors.fg,
-    borderRadius: 5,
+    borderRadius: 20,
     marginBottom:16,
     width: Dimensions.get('screen').width / 1.15,
     elevation: 20,

@@ -108,6 +108,7 @@ const LoginScreen = ({ navigation }) => {
 
 export default LoginScreen
 
+const screen = Dimensions.get('screen')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -129,8 +130,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   image: {
-    width: Dimensions.get('screen').width / 1.15,
-    height: Dimensions.get('screen').height / 4,
+    width: screen.width / 1.15,
+    height: screen.height / 4,
     resizeMode: 'contain',
     alignSelf: 'center'
   },
@@ -146,13 +147,13 @@ const styles = StyleSheet.create({
   },
   error: {
     fontSize: 16,
-    color: colors.warn,
+    color: colors.fg,
     textAlign: 'center',
     height: 24
   },
   additionalStyles:{
     inner_container: {
-      marginHorizontal:Dimensions.get('screen').width/4
+      marginHorizontal:screen.width/4
     }
   }
 })

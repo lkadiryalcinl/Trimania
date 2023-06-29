@@ -49,7 +49,7 @@ const Results = ({navigation,route}) => {
           <Lottie source={require('../assets/Lottie/celebration.json')} autoPlay loop/>
         </View>
         <View style={styles.score_info}>
-          <Text style={styles.text}>your score is : {score}</Text>
+          <Text style={styles.text}>your score is : <Text style={[styles.text,{color:colors.ac}]}>{score}</Text></Text>
         </View>
         <View style={styles.button_container}>
           <Button label={'Back to Board'} icon={{name:'back' ,color:colors.fg,size:24}} onPress={handleFinish}/>

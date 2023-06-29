@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width - 64,
     backgroundColor: '#D4D4D4',
     minHeight: Dimensions.get('screen').height / 16,
-    borderRadius: 20,
+    borderRadius: 50,
     padding: 16,
     justifyContent: 'space-between',
     alignItems: 'center',

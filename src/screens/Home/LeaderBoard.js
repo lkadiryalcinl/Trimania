@@ -1,5 +1,18 @@
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { 
+  ActivityIndicator, 
+  FlatList, 
+  StyleSheet, 
+  Text, 
+  View 
+} from 'react-native'
+
+import React, 
+{ 
+  useEffect,
+  useState,
+  useRef
+} from 'react'
+
 import LeaderBoardCard from './LeaderBoardCard'
 import colors from '../../utils/colors'
 
@@ -10,6 +23,9 @@ const LeaderBoard = ({user}) => {
   const [allUsers, setAllUsers] = useState([])
   const [loading, setLoading] = useState(false)
 
+  // FlatList reference
+  const flatListRef = useRef();
+
   useEffect(() => {
     setLoading(true)
     const fetchUsers = async () => {
@@ -18,6 +34,15 @@ const LeaderBoard = ({user}) => {
     }
     fetchUsers()
   }, [])
+
+  useEffect(() => {
+    if (user && allUsers.length > 0) {
+      const userIndex = allUsers.findIndex(item => item.userID === user.userID);
+      if (userIndex >= 0) {
+        flatListRef?.current?.scrollToIndex({index: userIndex, animated: true});
+      }
+    }
+  }, [user, allUsers])
 
   const renderItem = (item) => <LeaderBoardCard id={item.index + 1} icon={item.item.icon} score={item.item.score} username={item.item.username} user={user} userID={item.item.userID}/>
 
@@ -30,7 +55,8 @@ const LeaderBoard = ({user}) => {
       <View style={styles.bottom}>
         {loading ? <ActivityIndicator size={100} style={styles.indicator} color={colors.ac}/> :
           <FlatList
-          showsVerticalScrollIndicator={false}
+            ref={flatListRef} // FlatList reference
+            showsVerticalScrollIndicator={false}
             data={allUsers}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
