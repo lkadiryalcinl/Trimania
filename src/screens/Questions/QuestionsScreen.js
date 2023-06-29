@@ -1,42 +1,54 @@
-import { 
-  StyleSheet, 
-  View, 
-  FlatList, 
+import {
+  StyleSheet,
+  View,
+  FlatList,
   Alert,
   BackHandler,
   ImageBackground
 } from 'react-native'
 
-import React,{useState,useEffect,useRef} from 'react'
-import colors from '../../utils/colors'
+import { useIsFocused } from '@react-navigation/native';
+import React, { useState, useEffect, useRef } from 'react'
 import Question from './Question';
 
 const QuestionsScreen = ({ navigation, route }) => {
-  const {data,user} = route.params
+  const { data, user, amountSize } = route.params
   const [seconds, setSeconds] = useState(12);
   const [index, setIndex] = useState(0);
-  const [score,setScore] = useState(0);
+  const [score, setScore] = useState(0);
 
   const flatListRef = useRef(0);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (seconds > 0) {
-      const timerId = setTimeout(() => {
+
+    let timerId;
+    if (seconds > 0 && isFocused) { // Check if screen is focused
+      timerId = setTimeout(() => {
         setSeconds(seconds - 1);
       }, 1000);
-      return () => clearTimeout(timerId);
+
     } else {
-      if (index === 9) {
-        navigation.navigate('Results',{score,user});
-        setIndex(0)
-        setSeconds(12)
+      setSeconds(12)
+      if (index === +amountSize - 1 && isFocused) { // Check if screen is focused
+        navigation.navigate('Results', { score, user });
+        setIndex(null)
         setScore(0)
-      } else {
+        flatListRef.current.scrollToIndex({ animated: true, index });
+      }
+      else if (index === null) {
+        setIndex(0)
+      }
+      else {
         setIndex((prevIndex) => prevIndex + 1);
-        setSeconds(12);
       }
     }
-  }, [seconds]);
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    }
+  }, [seconds, isFocused]);
 
   useEffect(() => {
     if (data) {
@@ -68,10 +80,10 @@ const QuestionsScreen = ({ navigation, route }) => {
   }, []);
 
   return (
-    <ImageBackground 
-    style={styles.outer_container}
-    source={require('../../assets/images/purple-blue-bg.jpg')}
-    resizeMode='cover'
+    <ImageBackground
+      style={styles.outer_container}
+      source={require('../../assets/images/purple-blue-bg.jpg')}
+      resizeMode='cover'
     >
       <View style={styles.swiper_container}>
         <FlatList
@@ -82,18 +94,18 @@ const QuestionsScreen = ({ navigation, route }) => {
           data={data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
-            return <Question 
-            category={item.category} 
-            question={item.question} 
-            index={index} 
-            correct_answer={item.correct_answer} 
-            incorrect_answers={item.incorrect_answers} 
-            seconds={seconds}
-            setSeconds={setSeconds}
-            score={score}
-            setScore={setScore}
-            difficulty={item.difficulty}
-            type={item.type}
+            return <Question
+              category={item.category}
+              question={item.question}
+              index={index}
+              correct_answer={item.correct_answer}
+              incorrect_answers={item.incorrect_answers}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              score={score}
+              setScore={setScore}
+              difficulty={item.difficulty}
+              type={item.type}
             />
           }}
         />
@@ -115,9 +127,9 @@ const styles = StyleSheet.create({
 
   swiper_container: {
     flex: 16,
-    margin:16
+    margin: 16
   },
-  ad:{
-    flex:1
+  ad: {
+    flex: 1
   }
 })

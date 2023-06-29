@@ -57,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
       style={{ flex: 1 }}
     >
       <View style={styles.top_container}>
-        <Image source={require('../assets/images/TriviaLogo.png')} style={styles.image} />
+        <Image source={require('../assets/images/Trimania.png')} style={styles.image} />
       </View>
       <View style={styles.bottom_container}>
         <Formik

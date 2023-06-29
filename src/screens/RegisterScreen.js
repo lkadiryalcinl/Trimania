@@ -132,12 +132,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   top: {
-    flex:3,
+    flex:5,
     justifyContent:'center',
   },
   bottom: {
-    flex:1,
-    justifyContent:'flex-start',
+    flex:2,
   },
   text_container: {
     padding: 4,

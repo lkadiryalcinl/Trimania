@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View, Dimensions, Alert,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Alert, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../../utils/colors'
 
-const Question = ({ category, question, correct_answer, incorrect_answers, type, index, seconds, setSeconds, score, setScore,difficulty }) => {
+const Question = ({ category, question, correct_answer, incorrect_answers, type, index, seconds, setSeconds, score, setScore, difficulty }) => {
   const [allAnswers, setAllAnswers] = useState([correct_answer, ...incorrect_answers]);
   const [disableButtons, setDisableButtons] = useState(false);
-  const [wrongIndex, setWrongIndex] = useState(null); 
+
+  const [wrongIndex, setWrongIndex] = useState(null);
   const [correctIndex, setCorrectIndex] = useState(null);
 
   useEffect(() => {
@@ -21,22 +22,20 @@ const Question = ({ category, question, correct_answer, incorrect_answers, type,
       }
       setAllAnswers(shuffledArray);
     }
-    setCorrectIndex(null);
-    setWrongIndex(null);
-    setDisableButtons(false);
-  }, [index, question]);
 
-  useEffect(() => {
-    setDisableButtons(false);
-  }, [index, question]);
+    setCorrectIndex(null)
+    setWrongIndex(null)
+  }, [correct_answer,incorrect_answers]);
 
-  const handleButtonPress = (item, index) => {
-    setDisableButtons(true);
+  const handleButtonPress = (item, id) => {
+    setDisableButtons(true)
+    setSeconds(1)
 
     if (item === correct_answer) {
-      setCorrectIndex(index);
+      setCorrectIndex(id)
+      setWrongIndex(null)
 
-      if(type === 'boolean') {
+      if (type === 'boolean') {
         if (difficulty === 'easy')
           setScore(score + 6)
         else if (difficulty === 'medium')
@@ -52,10 +51,13 @@ const Question = ({ category, question, correct_answer, incorrect_answers, type,
         else
           setScore(score + 20)
       }
+      setDisableButtons(false)
+    }
+    else {
+      setWrongIndex(id)
+      setCorrectIndex(allAnswers.findIndex(element => element == correct_answer))
 
-    } else {
-
-      if(type === 'boolean') {
+      if (type === 'boolean') {
         if (difficulty === 'easy')
           setScore(score - 3)
         else if (difficulty === 'medium')
@@ -71,11 +73,9 @@ const Question = ({ category, question, correct_answer, incorrect_answers, type,
         else
           setScore(score - 10)
       }
-
-      setWrongIndex(index);
-      setCorrectIndex(allAnswers.indexOf(correct_answer));
+      setDisableButtons(false)
     }
-    setSeconds(2)
+    
   }
 
   const formattedCategory = decodeURIComponent(category)
@@ -102,27 +102,27 @@ const Question = ({ category, question, correct_answer, incorrect_answers, type,
         <View style={styles.bottom_top}>
           <Text style={styles.text_question}><Text>{index + 1}. </Text>{formattedQuestion}</Text>
         </View>
-       <View style={styles.bottom_bottom}>
-        {allAnswers.map((item, index) => (
-          <TouchableOpacity
-            style={[
-              styles.button,
-              index === correctIndex ? {borderWidth:2,borderColor:'green'} : index === wrongIndex ? {borderWidth:2,borderColor:'red'} : {borderWidth:2,borderColor:'#D4D4D4'}
-            ]}
-            key={index}
-            onPress={() => handleButtonPress(item, index)}
-            disabled={disableButtons}
-          >
-            <Text
+        <View style={styles.bottom_bottom}>
+          {allAnswers.map((item, index) => (
+            <TouchableOpacity
               style={[
-                styles.button_text
+                styles.button,
+                index === correctIndex ? { borderWidth: 2, borderColor: 'green' } : index === wrongIndex ? { borderWidth: 2, borderColor: 'red' } : { borderWidth: 2, borderColor: '#D4D4D4' }
               ]}
+              key={index}
+              onPress={() => handleButtonPress(item, index)}
+              disabled={disableButtons}
             >
-              {decodeURIComponent(item)}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+              <Text
+                style={[
+                  styles.button_text
+                ]}
+              >
+                {decodeURIComponent(item)}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
       </View>
     </View>
@@ -160,18 +160,18 @@ const styles = StyleSheet.create({
   bottom_top: {
     flex: 1,
     width: Dimensions.get('screen').width - 64,
-    minHeight:Dimensions.get('screen').height/12,
+    minHeight: Dimensions.get('screen').height / 12,
     backgroundColor: '#D4D4D4',
     borderRadius: 5,
     justifyContent: 'center',
     margin: 16,
-    alignItems:'center'
+    alignItems: 'center'
   },
   bottom_bottom: {
     flex: 3,
     justifyContent: 'center',
-    alignItems:'center',
-    margin:16
+    alignItems: 'center',
+    margin: 16
   },
   text_question: {
     fontSize: 18,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width - 64,
     backgroundColor: '#D4D4D4',
     minHeight: Dimensions.get('screen').height / 16,
-    borderRadius:20,
+    borderRadius: 20,
     padding: 16,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
   button_text: {
     fontSize: 18,
     color: colors.black,
-    flexWrap:'wrap'
+    flexWrap: 'wrap'
   }
 })

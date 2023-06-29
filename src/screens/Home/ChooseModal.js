@@ -38,7 +38,8 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                 } else {
                     navigation.navigate('Questions', {
                         data: data.results,
-                        user
+                        user,
+                        amountSize
                     });
                 }
                 setDisabled(false)

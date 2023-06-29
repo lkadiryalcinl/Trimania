@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   lottie:{
-    flex:3
+    flex:3,
   },
   score_info:{
-    flex:4,
+    flex:1,
     justifyContent:'space-evenly',
     alignItems:'center',
 
