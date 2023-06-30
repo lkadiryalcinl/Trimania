@@ -48,11 +48,19 @@ const createUser = {
         .required(Error['required']),
 }
 
+const forgotPassword = {
+    email: yup
+    .string(Error['string'])
+    .email(Error['email'])
+    .required(Error['required']),
+}
+
 const createUserValidationSchema = yup.object().shape(createUser);
 const signInValidationSchema = yup.object().shape(signIn);
-
+const forgotPasswordValidationSchema = yup.object().shape(forgotPassword)
 
 export {
     createUserValidationSchema,
-    signInValidationSchema
+    signInValidationSchema,
+    forgotPasswordValidationSchema
 }

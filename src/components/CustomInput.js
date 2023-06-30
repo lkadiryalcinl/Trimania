@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/AntDesign'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../utils/colors';
 
 const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, error }) => {
@@ -27,7 +28,7 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
         <View style={{ position: 'absolute', right: Dimensions.get('screen').width / 28, top: 12 }}>
           {
             secret ? (
-              <Icon
+              <Icon2
                 name={passEntry ? 'eye-off' : 'eye'}
                 size={24}
                 onPress={() => setPassEntry(!passEntry)}

@@ -72,7 +72,7 @@ const RegisterScreen = ({ navigation }) => {
                   onChangeText={handleChange('username')}
                   onBlur={handleBlur('username')}
                   value={values.username}
-                  icon={{ name: 'account', size: 32, color: colors.fg }}
+                  icon={{ name: 'user', size: 32, color: colors.fg }}
                 />
 
                 {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}

@@ -12,7 +12,8 @@ import {
 import
 React, {
   useEffect,
-  useRef
+  useRef,
+  useState
 } from 'react'
 
 import Button from '../components/CustomButton'
@@ -22,9 +23,13 @@ import colors from '../utils/colors'
 import { Formik } from 'formik'
 
 import signIn from '../firebase/signInUser'
+import forgotPassword from '../firebase/forgotPassword'
 import { signInValidationSchema } from '../utils/validations'
+import Modal from 'react-native-modal'
 
 const LoginScreen = ({ navigation }) => {
+  const [modalVisible,setModalVisible] = useState(false)
+
   const appState = useRef(AppState.currentState);
   let formikRef = React.createRef();
 
@@ -95,6 +100,7 @@ const LoginScreen = ({ navigation }) => {
                 (touched.email && errors.email) || (touched.password && errors.password) ? { ...styles.bottom_bottom_container, justifyContent: 'center' } : null
                 ]}>
                 <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles}/>
+                <TouchableOpacity style={styles.button_below} onPress={() => navigation.navigate('ForgotPassword')}><Text style={styles.text}>Reset password</Text></TouchableOpacity>
               </View>
 
             </>
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg
   },
   top_container: {
-    flex: 4,
+    flex: 3,
     justifyContent: 'center',
   },
   bottom_container: {
@@ -155,5 +161,10 @@ const styles = StyleSheet.create({
     inner_container: {
       marginHorizontal:screen.width/4
     }
+  },
+  button_below:{
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:8
   }
 })

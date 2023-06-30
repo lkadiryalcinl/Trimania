@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth'
 //Auth Stack
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 
 //Main Stack
 import HomeScreen from './screens/Home/HomeScreen'
@@ -25,6 +26,7 @@ const AuthStack = () => {
       }}>
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
+        <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen} />
       </Stack.Navigator>
     </>
   )
