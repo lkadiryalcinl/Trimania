@@ -7,7 +7,7 @@ const Error = {
     required: "This field is required.",
     minCharacter: (min) => `You should enter at least ${min} characters in this field.`,
     maxCharacter: (max) => `You should enter no more than ${max} characters in this field.`,
-    regex:"Must Contain 8 Characters, At Least One Letter and Number"
+    regex:"Must Contain 6 Characters, At Least One Letter and Number"
 }
 
 
@@ -21,7 +21,7 @@ const authValidations = {
 
         password: yup
         .string(Error['string'])
-        .min(8,({min}) => Error['minCharacter'](min))
+        .min(6,({min}) => Error['minCharacter'](min))
         .max(16,({max}) => Error['maxCharacter'](max))
         .required(Error['required']),
 
@@ -44,7 +44,7 @@ const createUser = {
 
         password: yup
         .string(Error['string'])
-        .matches(/^(?=.*[A-Za-z])(?=.*\d).{8,}$/,Error['regex'])
+        .matches(/^(?=.*[A-Za-z])(?=.*\d).{6,}$/,Error['regex'])
         .required(Error['required']),
 }
 

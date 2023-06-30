@@ -19,7 +19,7 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
             placeholder={placeholder}
             secureTextEntry={passEntry}
             value={value}
-            onChangeText={onChangeText}
+            onChangeText={(text) => onChangeText(text.trim())}
             placeholderTextColor={'#555555'}
             autoCapitalize='none'
           />

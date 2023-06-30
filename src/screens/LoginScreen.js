@@ -6,13 +6,10 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
-  AppState
 } from 'react-native'
 
 import
 React, {
-  useEffect,
-  useRef,
   useState
 } from 'react'
 
@@ -23,37 +20,15 @@ import colors from '../utils/colors'
 import { Formik } from 'formik'
 
 import signIn from '../firebase/signInUser'
-import forgotPassword from '../firebase/forgotPassword'
 import { signInValidationSchema } from '../utils/validations'
-import Modal from 'react-native-modal'
 
 const LoginScreen = ({ navigation }) => {
-  const [modalVisible,setModalVisible] = useState(false)
+  const[loading,setLoading] = useState(false)
 
-  const appState = useRef(AppState.currentState);
-  let formikRef = React.createRef();
-
-  useEffect(() => {
-    // AppState değişikliklerini dinleyen bir abonelik oluşturun
-    const appStateListener = AppState.addEventListener('change', handleAppStateChange);
-
-    // Cleanup fonksiyonunda aboneliği kaldırın
-    return () => {
-      appStateListener.remove();
-    };
-  }, []);
-
-  const handleAppStateChange = (nextAppState) => {
-    if (
-      appState.current.match(/inactive|background/) &&
-      nextAppState === 'active'
-    ) {
-      if (formikRef.current) {
-        formikRef.current.resetForm();
-      }
-    }
-    appState.current = nextAppState;
-  };
+  const handleSignIn = async(values) => {
+    const loadingProp = signIn(values)
+    console.log(loadingProp);
+  }
 
   return (
     <ImageBackground
@@ -66,10 +41,9 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={styles.bottom_container}>
         <Formik
-          innerRef={formikRef}
           initialValues={{ email: '', password: '', }}
           validationSchema={signInValidationSchema}
-          onSubmit={signIn}
+          onSubmit={handleSignIn}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>
@@ -99,7 +73,7 @@ const LoginScreen = ({ navigation }) => {
                 [styles.bottom_bottom_container,
                 (touched.email && errors.email) || (touched.password && errors.password) ? { ...styles.bottom_bottom_container, justifyContent: 'center' } : null
                 ]}>
-                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles}/>
+                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} loading={loading} disabled={loading}/>
                 <TouchableOpacity style={styles.button_below} onPress={() => navigation.navigate('ForgotPassword')}><Text style={styles.text}>Reset password</Text></TouchableOpacity>
               </View>
 

@@ -5,19 +5,18 @@ import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../components/CustomButton'
 import { categories, difficulties, questionTypes, amounts } from '../../utils/modalData';
 import colors from '../../utils/colors';
-import { showMessage } from 'react-native-flash-message';
 
 const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
     const [category, setCategory] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
     const [questionType, setQuestionType] = useState(null);
     const [amount, setAmount] = useState(null);
-    const [disabled, setDisabled] = useState(false);
+    const [loading,setLoading] = useState(false);
 
     const toggleModal = () => setModalVisible(!modalVisible)
 
     const getQuestions = () => {
-        setDisabled(true)
+        setLoading(true)
         if (!category || !difficulty || !questionType || !amount) {
             Alert.alert("Error", "Please fill in all options.");
             setDisabled(false)
@@ -42,7 +41,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         amountSize
                     });
                 }
-                setDisabled(false)
+                setLoading(false)
             })
             .catch(error =>
                 Alert.alert('Error', 'An error has occurred, please try again.'),
@@ -118,7 +117,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                     />
                 </View>
                 <View style={styles.button_container} >
-                    <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={getQuestions} disabled={disabled} />
+                    <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={getQuestions} disabled={loading} loading={loading}/>
                 </View>
             </View>
         </Modal>

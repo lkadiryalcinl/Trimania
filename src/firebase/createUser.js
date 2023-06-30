@@ -2,10 +2,14 @@ import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { showMessage } from 'react-native-flash-message'
 import { getFirebaseAuthErrorMessage, getFirebaseFirestoreErrorMessage } from './error'
+import { useState } from 'react'
 
 const createUser = async (data) => { 
-    try {
+    const [loading,setLoading] = useState(true)
+    
 
+    try {
+        
         await auth().createUserWithEmailAndPassword(data.email, data.password)
         .then((userCredential) => {
             userCredential.user.sendEmailVerification()
@@ -14,7 +18,9 @@ const createUser = async (data) => {
                 icon: 1,
                 userID: userCredential.user.uid
             });
+            setLoading(false)
         })
+
     } catch (err) {
         let message = '';
         if (err.code && err.code.startsWith('auth/')) {  // err.code var olduğunu kontrol ediyoruz
@@ -29,11 +35,10 @@ const createUser = async (data) => {
             message,
             type: 'warning'
         });
+        setLoading(false)
+    }finally{
+        return loading
     }
 }
-
-
-
-
 
 export default createUser;
