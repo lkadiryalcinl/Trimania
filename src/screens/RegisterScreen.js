@@ -81,6 +81,7 @@ const RegisterScreen = ({ navigation }) => {
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
+                  keyboardType={'email-address'}
                   icon={{ name: 'mail', size: 32, color: colors.fg }}
                 />
 
