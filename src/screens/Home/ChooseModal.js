@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     dropdown_item_text_style:{
         color: colors.black,
         textAlign: 'center',
-        fontWeight:'600'
     },
     button_container: {
         flex: 1,
