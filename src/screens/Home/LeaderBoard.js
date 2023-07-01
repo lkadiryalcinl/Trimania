@@ -44,7 +44,15 @@ const LeaderBoard = ({user}) => {
     }
   }, [user, allUsers])
 
-  const renderItem = (item) => <LeaderBoardCard id={item.index + 1} icon={item.item.icon} score={item.item.score} username={item.item.username} user={user} userID={item.item.userID}/>
+  const renderItem = ({ item, index }) => 
+    <LeaderBoardCard
+      id={index + 1}
+      icon={item?.icon}
+      score={item?.score}
+      username={item?.username}
+      user={user}
+      userID={item?.userID}
+    />
 
   return (
     <View style={styles.container}>
