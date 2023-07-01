@@ -93,7 +93,7 @@ const RegisterScreen = ({ navigation }) => {
                   value={values.password}
                   secret={true}
                   icon={{ name: 'key', size: 32, color: colors.fg}}
-
+                  limit={16}
                 />
 
                 {touched.confirm && errors.confirm && <Text style={styles.error}>{errors.confirm}</Text>}
@@ -104,7 +104,7 @@ const RegisterScreen = ({ navigation }) => {
                   value={values.confirm}
                   secret={true}
                   icon={{ name: 'key', size: 32, color: colors.fg }}
-
+                  limit={16}
                 />
 
                 <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} />

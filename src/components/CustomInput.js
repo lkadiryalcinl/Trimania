@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../utils/colors';
 
-const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, error,keyboardType }) => {
+const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, error,keyboardType,limit }) => {
   const [passEntry, setPassEntry] = useState(secret);
 
   return (
@@ -23,6 +23,7 @@ const CustomInput = ({ placeholder, onChangeText, secret = false, value, icon, e
             placeholderTextColor={'#555555'}
             autoCapitalize='none'
             keyboardType={keyboardType}
+            maxLength={limit}
           />
         </View>
 
