@@ -1,16 +1,18 @@
-import { 
-  ActivityIndicator, 
-  FlatList, 
-  StyleSheet, 
-  Text, 
-  View 
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  RefreshControl
 } from 'react-native'
 
-import React, 
-{ 
+import React,
+{
   useEffect,
   useState,
-  useRef
+  useRef,
+  useCallback
 } from 'react'
 
 import LeaderBoardCard from './LeaderBoardCard'
@@ -19,32 +21,44 @@ import colors from '../../utils/colors'
 import getAllUsers from '../../firebase/getAllUsers'
 import LeaderBoardFields from './LeaderBoardFields'
 
-const LeaderBoard = ({user}) => {
+const LeaderBoard = ({ user }) => {
   const [allUsers, setAllUsers] = useState([])
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(true);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+  }, []);
+
+  // Fetch users function
+  const fetchUsers = async () => {
+    setLoading(true)
+    const users = await getAllUsers();
+    setAllUsers(users);
+    setLoading(false);
+    setRefreshing(false);
+  }
+
+  // useEffect to fetch users when refreshing state changes to true
+  useEffect(() => {
+    if(refreshing){
+      fetchUsers();
+    }
+  }, [refreshing])
 
   // FlatList reference
   const flatListRef = useRef();
 
   useEffect(() => {
-    setLoading(true)
-    const fetchUsers = async () => {
-      setAllUsers(await getAllUsers())
-      setLoading(false)
-    }
-    fetchUsers()
-  }, [])
-
-  useEffect(() => {
-    if (user && allUsers.length > 0) {
+    if (!refreshing && user && allUsers.length > 0) {
       const userIndex = allUsers.findIndex(item => item.userID === user.userID);
       if (userIndex >= 0) {
-        flatListRef?.current?.scrollToIndex({index: userIndex, animated: true});
+        flatListRef?.current?.scrollToIndex({ index: userIndex, animated: true });
       }
     }
-  }, [user, allUsers])
+  }, [user, allUsers, refreshing])
 
-  const renderItem = ({ item, index }) => 
+  const renderItem = ({ item, index }) =>
     <LeaderBoardCard
       id={index + 1}
       icon={item?.icon}
@@ -61,13 +75,19 @@ const LeaderBoard = ({user}) => {
       </View>
       <LeaderBoardFields />
       <View style={styles.bottom}>
-        {loading ? <ActivityIndicator size={100} style={styles.indicator} color={colors.ac}/> :
+        {loading ? <ActivityIndicator size={100} style={styles.indicator} color={colors.ac} /> :
           <FlatList
             ref={flatListRef} // FlatList reference
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.ac,colors.bg]}/>
+            }
             showsVerticalScrollIndicator={false}
             data={allUsers}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
+            getItemLayout={(data, index) => (
+              {length: 80, offset: 80 * index, index}
+            )}
           />
         }
       </View>
