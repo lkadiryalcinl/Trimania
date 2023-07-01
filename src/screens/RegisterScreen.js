@@ -93,7 +93,6 @@ const RegisterScreen = ({ navigation }) => {
                   value={values.password}
                   secret={true}
                   icon={{ name: 'key', size: 32, color: colors.fg}}
-                  limit={16}
                 />
 
                 {touched.confirm && errors.confirm && <Text style={styles.error}>{errors.confirm}</Text>}

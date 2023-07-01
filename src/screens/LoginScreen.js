@@ -66,7 +66,6 @@ const LoginScreen = ({ navigation }) => {
                   value={values.password}
                   secret={true}
                   icon={{ name: 'key', size: 32, color: colors.fg }}
-                  limit={16}
                 />
 
               </View>
