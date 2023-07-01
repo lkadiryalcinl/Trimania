@@ -1,40 +1,38 @@
-import { StyleSheet, Dimensions, Text, View, Image, TouchableOpacity, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
-
-import Modal from "react-native-modal";
-import getAvatar from '../../utils/getAvatar'
-import auth from '@react-native-firebase/auth'
-import findUserById from '../../firebase/findUserById'
-import Button from '../../components/CustomButton'
-import colors from '../../utils/colors'
-
-import Icon from 'react-native-vector-icons/AntDesign'
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Dimensions, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import Modal from 'react-native-modal';
+import { useNavigation } from '@react-navigation/native';
+import findUserById from '../../firebase/findUserById';
 import updateIcon from '../../firebase/updateIcon'
+import getAvatar from '../../utils/getAvatar';
+import CustomButton from '../../components/CustomButton';
+import colors from '../../utils/colors';
+import Icon from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth'
 
-const changeIcon = ({ modalVisible, setModalVisible, navigation }) => {
-  const [user,setUser] = useState([])
-  const [selectedIcon, setSelectedIcon] = useState()
+const screen = Dimensions.get('window');
+const numbers = Array.from({ length: 12 }, (_, i) => i + 1);
+
+const ChangeIcon = ({ modalVisible, setModalVisible }) => {
+  const [user, setUser] = useState([]);
+  const [selectedIcon, setSelectedIcon] = useState();
+
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const fetchData = async() => {
-      setUser(await findUserById(auth().currentUser.uid))
-    }
-    fetchData()
-  },[])
-
-  let numbers = [];
-  for (let i = 1; i <= 12; i++) {
-    numbers.push(i);
-  }
+    const fetchData = async () => {
+      setUser(await findUserById(auth().currentUser.uid));
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async (newIconValue) => {
     if (user.icon !== newIconValue) {
-      await updateIcon(newIconValue)
-      setModalVisible(!modalVisible)
-      navigation.replace('Home')
+      await updateIcon(newIconValue);
+      setModalVisible(false);
+      navigation.replace('Home');
     }
-  }
-
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => setSelectedIcon(item)}>
@@ -45,11 +43,11 @@ const changeIcon = ({ modalVisible, setModalVisible, navigation }) => {
           selectedIcon === item ? styles.selectedIcon : null
         ]}
       />
-      {selectedIcon === item ? <Icon name='check' size={36} color={colors.ac} style={styles.check_icon_style} /> : null}
+      {selectedIcon === item && <Icon name='check' size={36} color={colors.ac} style={styles.check_icon_style} />}
     </TouchableOpacity>
   );
 
-  const toggleModal = () => setModalVisible(!modalVisible)
+  const toggleModal = () => setModalVisible(!modalVisible);
 
   return (
     <View style={styles.container}>
@@ -60,29 +58,27 @@ const changeIcon = ({ modalVisible, setModalVisible, navigation }) => {
         onSwipeComplete={toggleModal}
         style={styles.modal}
       >
-        <View style={styles.inside_modal}>
-          <View style={styles.flatList}>
-
+        <View style={styles.modalContainer}>
+          <View style={styles.line} />
           <FlatList
             data={numbers}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
             numColumns={3}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.flatList}
           />
-          </View>
-          <View style={styles.button}>
-            <Button label={'Edit'} icon={{ name: 'edit', size: 18, color: colors.fg }} onPress={(selectedIcon ? () => handleSubmit(selectedIcon) : () => { })} />
-          </View>
+        </View>
+        <View style={styles.button}>
+        <CustomButton label={'Edit'} icon={{ name: 'edit', size: 18, color: colors.fg }} onPress={(selectedIcon ? () => handleSubmit(selectedIcon) : () => { })} style={styles.button} />
+
         </View>
       </Modal>
     </View>
-  )
-}
+  );
+};
 
-export default changeIcon
-
-const screen = Dimensions.get('screen')
+export default ChangeIcon;
 
 const styles = StyleSheet.create({
   container: {
@@ -92,40 +88,41 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     margin: 0,
   },
-  inside_modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: screen.width,
+  modalContainer: {
+    backgroundColor: colors.fg,
     height: '50%',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    alignItems: 'center',
   },
-  button: {
-    flex:1,
-    position:'absolute',
-    alignSelf:'center',
-    bottom:0
+  line: {
+    width: '20%',
+    height: 10,
+    backgroundColor: '#ccc',
+    marginVertical: 15,
+    borderRadius:20,
   },
-  flatList:{
-    flex:8
+  flatList: {
+    flexGrow: 1,
   },
   image: {
-    width: screen.width / 3 - 16,
-    height: screen.height / 4,
-    margin:4
-  },
-  selectedIcon: {
     width: screen.width / 3,
     height: screen.height / 4,
-    borderWidth: 1,
+  },
+  selectedIcon: {
+    borderWidth: 3,
     borderColor: colors.ac,
-    borderRadius: 50
+    borderRadius: 50,
   },
   check_icon_style: {
     position: 'absolute',
     bottom: 0,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
-  warn:{
-    color:colors.warn
+  button:{
+    position: 'absolute',	
+    bottom:0,
+    left:0,
+    right:0,
   }
-})
+});

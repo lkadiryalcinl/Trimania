@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Text, View, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from "react-native-modal";
 import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../components/CustomButton'
@@ -48,6 +48,12 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
             );
     };
 
+    useEffect(() => {
+        setAmount(null)
+        setCategory(null)
+        setDifficulty(null)
+        setQuestionType(null)
+    },[modalVisible])
 
     return (
         <Modal
@@ -65,7 +71,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
-                        itemTextStyle={{ color: colors.black }}
+                        itemTextStyle={styles.dropdown_item_text_style}
                         label="Category"
                         placeholder="Select category"
                         labelField="label"
@@ -79,7 +85,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
-                        itemTextStyle={{ color: colors.black }}
+                        itemTextStyle={styles.dropdown_item_text_style}
                         label="Difficulty"
                         placeholder="Select difficulty"
                         labelField="label"
@@ -93,7 +99,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
-                        itemTextStyle={{ color: colors.black }}
+                        itemTextStyle={styles.dropdown_item_text_style}
                         label="Type"
                         placeholder="Select type"
                         labelField="label"
@@ -106,7 +112,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
-                        itemTextStyle={{ color: colors.black }}
+                        itemTextStyle={styles.dropdown_item_text_style}	
                         label="Amount"
                         placeholder="Select amount"
                         labelField="label"
@@ -132,14 +138,14 @@ const deviceSize = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#eceff1',
-        borderRadius: 10,
+        borderRadius: 20,
         height: deviceSize.height / 2,
     },
     title_container: {
         flex: 1,
         backgroundColor: colors.ac,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -151,6 +157,11 @@ const styles = StyleSheet.create({
     dropdown_container: {
         flex: 4,
         padding: 10,
+    },
+    dropdown_item_text_style:{
+        color: colors.black,
+        textAlign: 'center',
+        fontWeight:'600'
     },
     button_container: {
         flex: 1,
@@ -164,6 +175,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         paddingHorizontal: 10,
         marginBottom: 20,
+        textAlign:'center'
     },
     placeholder_style: {
         fontSize: 16,
