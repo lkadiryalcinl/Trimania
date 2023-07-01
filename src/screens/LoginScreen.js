@@ -70,11 +70,8 @@ const LoginScreen = ({ navigation }) => {
                 />
 
               </View>
-              <View style={
-                [styles.bottom_bottom_container,
-                (touched.email && errors.email) || (touched.password && errors.password) ? { ...styles.bottom_bottom_container, justifyContent: 'center' } : null
-                ]}>
-                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} loading={loading} disabled={loading}/>
+              <View style={styles.bottom_bottom_container}>
+                <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} loading={loading} disabled={loading} />
                 <TouchableOpacity style={styles.button_below} onPress={() => navigation.navigate('ForgotPassword')}><Text style={styles.text}>Reset password</Text></TouchableOpacity>
               </View>
 
@@ -100,14 +97,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bottom_container: {
-    flex: 5,
+    flex: 6,
     justifyContent: 'center',
   },
   bottom_top_container: {
     flex: 2,
   },
   bottom_bottom_container: {
-    flex: 2.5,
+    flex: 4,
     justifyContent: 'flex-start'
   },
   image: {

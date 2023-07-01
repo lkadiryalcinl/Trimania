@@ -106,12 +106,10 @@ const RegisterScreen = ({ navigation }) => {
                   icon={{ name: 'key', size: 32, color: colors.fg }}
 
                 />
-                
-              </View>
 
-              <View style={styles.bottom}>
-                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles}/>
+                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} />
               </View>
+              <View style={styles.bottom}/>
             </>
           )}
         </Formik>
@@ -133,11 +131,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   top: {
-    flex:5,
+    flex:8,
     justifyContent:'center',
   },
-  bottom: {
-    flex:2,
+  bottom:{
+    flex:1
   },
   text_container: {
     padding: 4,
