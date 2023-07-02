@@ -92,19 +92,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg
   },
   top_container: {
-    flex: 3,
+    flex: 2,
     justifyContent: 'center',
   },
   bottom_container: {
-    flex: 6,
-    justifyContent: 'center',
+    flex: 4,
   },
   bottom_top_container: {
     flex: 2,
   },
   bottom_bottom_container: {
-    flex: 4,
-    justifyContent: 'flex-start'
+    flex: 3,
   },
   image: {
     width: screen.width / 1.15,
@@ -115,8 +113,8 @@ const styles = StyleSheet.create({
   text_container: {
     padding: 4,
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: 0
+    flex:1,
+    justifyContent:'flex-end'
   },
   text: {
     fontSize: 18,

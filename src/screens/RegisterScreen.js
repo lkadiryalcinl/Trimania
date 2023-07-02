@@ -64,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>
-
+              <View style={{flex:1}}/>
               <View style={styles.top}>
                 {touched.username && errors.username && <Text style={styles.error}>{errors.username}</Text>}
                 <Input
@@ -105,10 +105,10 @@ const RegisterScreen = ({ navigation }) => {
                   icon={{ name: 'key', size: 32, color: colors.fg }}
                   limit={16}
                 />
-
-                <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} />
               </View>
-              <View style={styles.bottom}/>
+              <View style={styles.bottom}>
+                  <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} />
+              </View>
             </>
           )}
         </Formik>
@@ -123,24 +123,24 @@ export default RegisterScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
   },
   top_container: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 3,
+    justifyContent:'center'
   },
   top: {
-    flex:8,
-    justifyContent:'center',
+    flex:3,
+    justifyContent:'center'
   },
   bottom:{
-    flex:1
+    flex:2,
+    marginTop:32
   },
   text_container: {
     padding: 4,
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: 0
+    flex:1,
+    justifyContent: 'flex-end',
   },
   text: {
     fontSize: 18,
@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 16,
     color: colors.fg,
-    textAlign: 'center'
+    textAlign: 'center',
+    height:24
   },
   additionalStyles:{
     inner_container: {
