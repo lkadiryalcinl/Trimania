@@ -2,9 +2,9 @@ import { StyleSheet, Dimensions, Text, View, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Modal from "react-native-modal";
 import { Dropdown } from 'react-native-element-dropdown';
-import Button from '../../components/CustomButton'
-import { categories, difficulties, questionTypes, amounts } from '../../utils/modalData';
-import colors from '../../utils/colors';
+import Button from '../../../components/CustomButton'
+import { categories, difficulties, questionTypes, amounts } from '../../../utils/modalData';
+import colors from '../../../utils/colors';
 
 const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
     const [category, setCategory] = useState(null);

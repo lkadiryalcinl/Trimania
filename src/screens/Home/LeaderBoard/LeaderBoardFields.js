@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import colors from '../../utils/colors'
+import colors from '../../../utils/colors'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 

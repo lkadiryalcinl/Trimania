@@ -19,16 +19,11 @@ import Input from '../components/CustomInput'
 import colors from '../utils/colors'
 import { Formik } from 'formik'
 
-import signIn from '../firebase/signInUser'
+import {signInUser} from '../firebase/AuthTransactions'
 import { signInValidationSchema } from '../utils/validations'
 
 const LoginScreen = ({ navigation }) => {
   const[loading,setLoading] = useState(false)
-
-  const handleSignIn = async(values) => {
-    const loadingProp = signIn(values)
-    console.log(loadingProp);
-  }
 
   return (
     <ImageBackground
@@ -43,7 +38,7 @@ const LoginScreen = ({ navigation }) => {
         <Formik
           initialValues={{ email: '', password: '', }}
           validationSchema={signInValidationSchema}
-          onSubmit={handleSignIn}
+          onSubmit={signInUser}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>

@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, ImageBackground, Alert,View,Text } from 'react-
 import Input from '../components/CustomInput'
 import Button from '../components/CustomButton'
 
-import forgotPassword from '../firebase/forgotPassword'
+import {forgotPassword} from '../firebase/AuthTransactions'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import { forgotPasswordValidationSchema } from '../utils/validations'

@@ -1,7 +1,7 @@
 import { StyleSheet,Dimensions, Text, View,Image } from 'react-native'
 import React from 'react'
-import colors from '../../utils/colors'
-import getAvatar from '../../utils/getAvatar'
+import colors from '../../../utils/colors'
+import getAvatar from '../../../utils/getAvatar'
 
 const LeaderBoardCard = ({id,icon,username,score,user,userID}) => {  
   const isActiveUser = user?.userID === userID;

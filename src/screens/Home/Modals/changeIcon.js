@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Dimensions, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import Modal from 'react-native-modal';
+import Button from '../../../components/CustomButton';
+
 import { useNavigation } from '@react-navigation/native';
-import findUserById from '../../firebase/findUserById';
-import updateIcon from '../../firebase/updateIcon'
-import getAvatar from '../../utils/getAvatar';
-import CustomButton from '../../components/CustomButton';
-import colors from '../../utils/colors';
+import { findUserById,updateIcon } from '../../../firebase/UserTransactions';
+import getAvatar from '../../../utils/getAvatar';
+
+import colors from '../../../utils/colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth'
 
@@ -70,7 +71,7 @@ const ChangeIcon = ({ modalVisible, setModalVisible }) => {
           />
         </View>
         <View style={styles.button}>
-        <CustomButton label={'Edit'} icon={{ name: 'edit', size: 18, color: colors.fg }} onPress={(selectedIcon ? () => handleSubmit(selectedIcon) : () => { })} style={styles.button} />
+        <Button label={'Edit'} icon={{ name: 'edit', size: 18, color: colors.fg }} onPress={(selectedIcon ? () => handleSubmit(selectedIcon) : () => { })} style={styles.button} />
 
         </View>
       </Modal>

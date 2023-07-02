@@ -14,7 +14,7 @@ import colors from '../utils/colors'
 import Button from '../components/CustomButton'
 import Lottie from 'lottie-react-native'
 
-import setUserScore from '../firebase/setUserScore'
+import { setUserScore } from '../firebase/UserTransactions'
 
 const Results = ({navigation,route}) => {
   const {score,user} = route.params

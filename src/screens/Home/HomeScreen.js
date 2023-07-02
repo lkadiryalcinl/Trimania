@@ -21,14 +21,13 @@ import auth from '@react-native-firebase/auth'
 
 import Button from '../../components/CustomButton'
 import colors from '../../utils/colors'
-import findUserById from '../../firebase/findUserById'
 import Icon from 'react-native-vector-icons/AntDesign'
 
-import LeaderBoard from './LeaderBoard'
+import LeaderBoard from './LeaderBoard/LeaderBoard'
 import getAvatar from '../../utils/getAvatar'
-import findUserRank from '../../firebase/findUserRank'
-import ChangeIcon from './changeIcon'
-import ChooseModal from './ChooseModal'
+import { findUserById,findUserRank } from '../../firebase/UserTransactions'
+import ChangeIcon from './Modals/changeIcon'
+import ChooseModal from './Modals/ChooseModal'
 
 const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useState({}); // useState içerisine başlangıç değeri olarak boş bir obje verildi.

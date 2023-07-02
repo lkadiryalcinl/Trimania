@@ -19,35 +19,9 @@ import colors from '../utils/colors'
 
 import { Formik } from 'formik'
 import {createUserValidationSchema} from '../utils/validations'
-import createUser from '../firebase/createUser'
 
 
 const RegisterScreen = ({ navigation }) => {
-
-  const appState = useRef(AppState.currentState);
-  let formikRef = React.createRef();
-
-  useEffect(() => {
-    // AppState değişikliklerini dinleyen bir abonelik oluşturun
-    const appStateListener = AppState.addEventListener('change', handleAppStateChange);
-
-    // Cleanup fonksiyonunda aboneliği kaldırın
-    return () => {
-      appStateListener.remove();
-    };
-  }, []);
-
-  const handleAppStateChange = (nextAppState) => {
-    if (
-      appState.current.match(/inactive|background/) &&
-      nextAppState === 'active'
-    ) {
-      if (formikRef.current) {
-        formikRef.current.resetForm();
-      }
-    }
-    appState.current = nextAppState;
-  };
 
   return (
     <ImageBackground

@@ -16,9 +16,9 @@ import React,
 } from 'react'
 
 import LeaderBoardCard from './LeaderBoardCard'
-import colors from '../../utils/colors'
+import colors from '../../../utils/colors'
 
-import getAllUsers from '../../firebase/getAllUsers'
+import { getAllUsers } from '../../../firebase/UserTransactions'
 import LeaderBoardFields from './LeaderBoardFields'
 
 const LeaderBoard = ({ user }) => {
