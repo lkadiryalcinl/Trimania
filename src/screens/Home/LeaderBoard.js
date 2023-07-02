@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  RefreshControl
+  RefreshControl,
 } from 'react-native'
 
 import React,
@@ -53,7 +53,7 @@ const LeaderBoard = ({ user }) => {
     if (!refreshing && user && allUsers.length > 0) {
       const userIndex = allUsers.findIndex(item => item.userID === user.userID);
       if (userIndex >= 0) {
-        flatListRef?.current?.scrollToIndex({ index: userIndex, animated: true });
+        flatListRef?.current?.scrollToIndex({ index: userIndex!==-1?userIndex:null, animated: true });
       }
     }
   }, [user, allUsers, refreshing])
@@ -85,9 +85,13 @@ const LeaderBoard = ({ user }) => {
             data={allUsers}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
-            getItemLayout={(data, index) => (
-              {length: 80, offset: 80 * index, index}
-            )}
+            initialScrollIndex={0}  
+            onScrollToIndexFailed={info => {
+              const wait = new Promise(resolve => setTimeout(resolve, 500));
+              wait.then(() => {
+                flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
+              });
+            }}
           />
         }
       </View>

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     active_container:{
       height:Dimensions.get('screen').height/12,	
         backgroundColor:colors.ac,
-        margin:5,
+        margin:6,
         borderRadius:5,
         flexDirection:'row',
         paddingVertical:5
