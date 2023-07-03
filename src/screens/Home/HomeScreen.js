@@ -13,6 +13,7 @@ import {
 
 import React,
 {
+  useContext,
   useEffect,
   useState
 } from 'react'
@@ -28,9 +29,11 @@ import getAvatar from '../../utils/getAvatar'
 import { findUserById,findUserRank } from '../../firebase/UserTransactions'
 import ChangeIcon from './Modals/changeIcon'
 import ChooseModal from './Modals/ChooseModal'
+import { Context } from '../../context/Context'
 
 const HomeScreen = ({ navigation }) => {
-  const [user, setUser] = useState({}); // useState içerisine başlangıç değeri olarak boş bir obje verildi.
+  const {currUser:user,setCurrUser:setUser} = useContext(Context)
+
   const [loading, setLoading] = useState(true);  // loading state'i default olarak true ayarlandı.
   const [userRank, setUserRank] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -120,7 +123,7 @@ const HomeScreen = ({ navigation }) => {
 
 
       <View style={styles.mid_container}>
-        <LeaderBoard user={user} />
+        <LeaderBoard />
       </View>
 
       <View style={styles.bottom_container}>

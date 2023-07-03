@@ -1,9 +1,11 @@
 import { StyleSheet,Dimensions, Text, View,Image } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import colors from '../../../utils/colors'
 import getAvatar from '../../../utils/getAvatar'
+import { Context } from '../../../context/Context'
 
-const LeaderBoardCard = ({id,icon,username,score,user,userID}) => {  
+const LeaderBoardCard = ({id,icon,username,score,userID}) => {  
+  const { currUser:user } = useContext(Context)
   const isActiveUser = user?.userID === userID;
 
  return ( 

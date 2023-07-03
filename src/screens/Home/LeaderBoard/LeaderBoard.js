@@ -12,7 +12,8 @@ import React,
   useEffect,
   useState,
   useRef,
-  useCallback
+  useCallback,
+  useContext
 } from 'react'
 
 import LeaderBoardCard from './LeaderBoardCard'
@@ -20,8 +21,11 @@ import colors from '../../../utils/colors'
 
 import { getAllUsers } from '../../../firebase/UserTransactions'
 import LeaderBoardFields from './LeaderBoardFields'
+import { Context } from '../../../context/Context'
 
-const LeaderBoard = ({ user }) => {
+const LeaderBoard = () => {
+  const { currUser:user } = useContext(Context)
+  
   const [allUsers, setAllUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(true);
@@ -64,7 +68,6 @@ const LeaderBoard = ({ user }) => {
       icon={item?.icon}
       score={item?.score}
       username={item?.username}
-      user={user}
       userID={item?.userID}
     />
 

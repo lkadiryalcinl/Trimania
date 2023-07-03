@@ -15,6 +15,7 @@ import QuestionsScreen from './screens/Questions/QuestionsScreen';
 import ResultsScreen from './screens/Results';
 
 import FlashMessage from 'react-native-flash-message';
+import {Context} from './context/Context'
 
 const Stack = createNativeStackNavigator()
 
@@ -62,12 +63,19 @@ const Router = () => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  const [currUser,setCurrUser] = useState({})
 
+  const values ={
+    currUser,
+    setCurrUser
+  }
   return (
-    <NavigationContainer >
-      {user ? <MainStack /> : <AuthStack />}
-      <FlashMessage position='top' />
-    </NavigationContainer>
+    <Context.Provider value={values}>
+      <NavigationContainer >
+        {user ? <MainStack /> : <AuthStack />}
+        <FlashMessage position='top' />
+      </NavigationContainer>
+    </Context.Provider>
   )
 }
 
