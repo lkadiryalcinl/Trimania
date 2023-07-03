@@ -9,7 +9,7 @@ import {
 
 import { useIsFocused } from '@react-navigation/native';
 import React, { useState, useEffect, useRef } from 'react'
-import Question from './Question';
+import Question from './Question'
 
 const QuestionsScreen = ({ navigation, route }) => {
   const { data, user, amountSize } = route.params
@@ -79,6 +79,19 @@ const QuestionsScreen = ({ navigation, route }) => {
     return () => backHandler.remove();
   }, []);
 
+  const renderItem = ({ item, index }) => {
+    return (
+      <Question
+        item={item}
+        index={index}
+        seconds={seconds}
+        setSeconds={setSeconds}
+        score={score}
+        setScore={setScore}
+      />
+    )
+  }
+
   return (
     <ImageBackground
       style={styles.outer_container}
@@ -93,16 +106,7 @@ const QuestionsScreen = ({ navigation, route }) => {
           ref={flatListRef}
           data={data}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return <Question
-              item={item}
-              index={index}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              score={score}
-              setScore={setScore}
-            />
-          }}
+          renderItem={renderItem}
         />
       </View>
       <View style={styles.ad}>

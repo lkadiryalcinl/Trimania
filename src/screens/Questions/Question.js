@@ -133,7 +133,6 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
 
 export default Question
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -163,10 +162,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Dimensions.get('screen').width - 64,
     minHeight: Dimensions.get('screen').height / 12,
-    backgroundColor: '#D4D4D4',
+    backgroundColor: colors.ac,
     borderRadius: 5,
     justifyContent: 'center',
     margin: 16,
+    padding:8,
     alignItems: 'center'
   },
   bottom_bottom: {
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   text_question: {
     fontSize: 18,
-    color: colors.black,
+    color: colors.fg,
     flexWrap: 'wrap'
   },
   under_category: {
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     width: Dimensions.get('screen').width - 64,
-    backgroundColor: '#D4D4D4',
+    backgroundColor: colors.ac,
     minHeight: Dimensions.get('screen').height / 16,
     borderRadius: 50,
     padding: 16,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   button_text: {
     fontSize: 18,
-    color: colors.black,
+    color: colors.fg,
     flexWrap: 'wrap'
   }
 })
