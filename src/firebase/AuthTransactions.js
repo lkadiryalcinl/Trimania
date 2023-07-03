@@ -2,9 +2,12 @@ import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { showMessage } from 'react-native-flash-message'
 import {getFirebaseAuthErrorMessage,getFirebaseFirestoreErrorMessage} from './error'
+import { useContext } from 'react'
+import { Context } from '../context/Context'
 
-const createUser = async (data) => {
+const createUser = async (data,setLoading) => {
     try {
+        setLoading(true)
         await auth().createUserWithEmailAndPassword(data.email, data.password)
             .then((userCredential) => {
                 userCredential.user.sendEmailVerification()
@@ -13,6 +16,7 @@ const createUser = async (data) => {
                     icon: 1,
                     userID: userCredential.user.uid
                 });
+                setLoading(false)
             })
 
     } catch (err) {
@@ -29,6 +33,7 @@ const createUser = async (data) => {
             message,
             type: 'warning'
         })
+        setLoading(false)
     }
 }
 
@@ -40,17 +45,30 @@ const forgotPassword = async function forgotPassword(email) {
     }
 }
 
-const signInUser = (data) => {
-
-    auth()
-        .signInWithEmailAndPassword(data.email, data.password)
-        .catch(err => {
-            showMessage({
-                message:getFirebaseAuthErrorMessage(err.code),
-                type:'warning'
+const signInUser = (data,setLoading) => {
+    try {
+        setLoading(true)
+        auth()
+            .signInWithEmailAndPassword(data.email, data.password)
+            .then(() => {
+                setLoading(false)
             })
+    } catch (err) {
+        let message = '';
+        if (err.code && err.code.startsWith('auth/')) {  // err.code var olduğunu kontrol ediyoruz
+            message = getFirebaseAuthErrorMessage(err.code);
+        } else if (err.code) {  // err.code var olduğunu kontrol ediyoruz
+            message = getFirebaseFirestoreErrorMessage(err.code);
+        }
+        else {
+            message = "Unknown error is encountered."
+        }
+        showMessage({
+            message,
+            type: 'warning'
         })
-
+        setLoading(false)
+    }
 }
 
 export {

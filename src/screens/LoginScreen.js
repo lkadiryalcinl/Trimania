@@ -10,7 +10,7 @@ import {
 
 import
 React, {
-  useState
+  useContext,
 } from 'react'
 
 import Button from '../components/CustomButton'
@@ -21,9 +21,10 @@ import { Formik } from 'formik'
 
 import {signInUser} from '../firebase/AuthTransactions'
 import { signInValidationSchema } from '../utils/validations'
+import { Context } from '../context/Context'
 
 const LoginScreen = ({ navigation }) => {
-  const[loading,setLoading] = useState(false)
+  const{loading,setLoading} = useContext(Context)
 
   return (
     <ImageBackground
@@ -38,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
         <Formik
           initialValues={{ email: '', password: '', }}
           validationSchema={signInValidationSchema}
-          onSubmit={signInUser}
+          onSubmit={(values) => signInUser(values,setLoading)}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>

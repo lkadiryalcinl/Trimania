@@ -5,12 +5,10 @@ import {
   TouchableOpacity, 
   View,
   ImageBackground,
-  AppState
 } from 'react-native'
 
 import React,{
-  useEffect,
-  useRef
+  useContext,
 } from 'react'
 
 import Button from '../components/CustomButton'
@@ -20,8 +18,12 @@ import colors from '../utils/colors'
 import { Formik } from 'formik'
 import {createUserValidationSchema} from '../utils/validations'
 
+import { createUser } from '../firebase/AuthTransactions'
+import { Context } from '../context/Context'
+
 
 const RegisterScreen = ({ navigation }) => {
+  const {loading,setLoading} = useContext(Context)
 
   return (
     <ImageBackground
@@ -31,10 +33,9 @@ const RegisterScreen = ({ navigation }) => {
     >
       <View style={styles.top_container}>
         <Formik
-          innerRef={formikRef}
           initialValues={{ username: '', email: '', password: '', confirm: '' }}
           validationSchema={createUserValidationSchema}
-          onSubmit={async(values)=> await createUser(values)}
+          onSubmit={async(values)=> createUser(values,setLoading)}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>
@@ -81,7 +82,7 @@ const RegisterScreen = ({ navigation }) => {
                 />
               </View>
               <View style={styles.bottom}>
-                  <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} />
+                  <Button label="Register" onPress={handleSubmit} icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} loading={loading} disabled={loading}/>
               </View>
             </>
           )}

@@ -64,10 +64,13 @@ const Router = () => {
   }, []);
 
   const [currUser,setCurrUser] = useState({})
+  const [loading,setLoading] = useState(false)
 
   const values ={
     currUser,
-    setCurrUser
+    setCurrUser,
+    loading,
+    setLoading
   }
   return (
     <Context.Provider value={values}>
