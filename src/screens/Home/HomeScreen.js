@@ -113,8 +113,8 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
 
             <View style={styles.text_container}>
-              <Text style={styles.text}>Are you ready? <Text style={[styles.text, { color: colors.ac }]}>{user ? user.username : ''}</Text></Text>
-              <Text style={styles.text}>Your current rank is : <Text style={[styles.text, { color: colors.ac }]}>{userRank ? userRank : 'Not exist'}</Text></Text>
+              <Text style={styles.text}>Are you ready? {user ? user.username : ''}</Text>
+              <Text style={styles.text}>Your current rank is : {userRank ? userRank : 'Not exist'}</Text>
             </View>
           </>
 
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     height: 100,
     marginLeft: 8,
     borderRadius: 50,
-    backgroundColor: 'purple',
+    backgroundColor: colors.ac,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 8
