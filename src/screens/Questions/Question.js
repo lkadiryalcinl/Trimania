@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../../utils/colors'
 
-const Question = ({ category, question, correct_answer, incorrect_answers, type, index, seconds, setSeconds, score, setScore, difficulty }) => {
+const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
+  const { category, question, correct_answer, incorrect_answers, type,difficulty} = item
+  
   const [allAnswers, setAllAnswers] = useState([correct_answer, ...incorrect_answers]);
   const [disableButtons, setDisableButtons] = useState(false);
 

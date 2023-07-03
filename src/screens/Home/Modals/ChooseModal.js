@@ -53,7 +53,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
         setCategory(null)
         setDifficulty(null)
         setQuestionType(null)
-    },[modalVisible])
+    }, [modalVisible])
 
     return (
         <Modal
@@ -72,6 +72,9 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
                         itemTextStyle={styles.dropdown_item_text_style}
+                        itemContainerStyle={styles.dropdown_item_container_style}
+                        iconColor={colors.ac}
+                        showsVerticalScrollIndicator={false}
                         label="Category"
                         placeholder="Select category"
                         labelField="label"
@@ -86,6 +89,9 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
                         itemTextStyle={styles.dropdown_item_text_style}
+                        itemContainerStyle={styles.dropdown_item_container_style}
+                        showsVerticalScrollIndicator={false}
+                        iconColor={colors.ac}
                         label="Difficulty"
                         placeholder="Select difficulty"
                         labelField="label"
@@ -100,6 +106,9 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
                         itemTextStyle={styles.dropdown_item_text_style}
+                        itemContainerStyle={styles.dropdown_item_container_style}
+                        showsVerticalScrollIndicator={false}
+                        iconColor={colors.ac}
                         label="Type"
                         placeholder="Select type"
                         labelField="label"
@@ -112,7 +121,10 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                         style={styles.dropdown}
                         placeholderStyle={styles.placeholder_style}
                         selectedTextStyle={styles.selected_text_style}
-                        itemTextStyle={styles.dropdown_item_text_style}	
+                        itemTextStyle={styles.dropdown_item_text_style}
+                        itemContainerStyle={styles.dropdown_item_container_style}
+                        showsVerticalScrollIndicator={false}
+                        iconColor={colors.ac}
                         label="Amount"
                         placeholder="Select amount"
                         labelField="label"
@@ -123,7 +135,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                     />
                 </View>
                 <View style={styles.button_container} >
-                    <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={getQuestions} disabled={loading} loading={loading}/>
+                    <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={getQuestions} disabled={loading} loading={loading} />
                 </View>
             </View>
         </Modal>
@@ -158,9 +170,13 @@ const styles = StyleSheet.create({
         flex: 4,
         padding: 10,
     },
-    dropdown_item_text_style:{
+    dropdown_item_text_style: {
         color: colors.black,
         textAlign: 'center',
+    },
+    dropdown_item_container_style: {
+        borderBottomWidth: 1,
+        borderBottomColor: colors.ac,
     },
     button_container: {
         flex: 1,
@@ -174,15 +190,16 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         paddingHorizontal: 10,
         marginBottom: 20,
-        textAlign:'center'
+        textAlign: 'center'
     },
     placeholder_style: {
         fontSize: 16,
-        color: colors.black
+        color: colors.black,
+        textAlign: 'center'
     },
     selected_text_style: {
         fontSize: 16,
-        backgroundColor: '#D4D4D4',
+        backgroundColor: colors.ac,
         borderBottomLeftRadius: 7,
         borderTopLeftRadius: 7,
         height: 48,
@@ -190,7 +207,8 @@ const styles = StyleSheet.create({
         marginLeft: -10,
         marginRight: 10,
         paddingLeft: 10,
-        color: colors.black
+        color: colors.fg,
+        textAlign: 'center'
     },
     start_button_text: {
         backgroundColor: colors.lightblue,

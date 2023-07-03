@@ -95,17 +95,12 @@ const QuestionsScreen = ({ navigation, route }) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
             return <Question
-              category={item.category}
-              question={item.question}
+              item={item}
               index={index}
-              correct_answer={item.correct_answer}
-              incorrect_answers={item.incorrect_answers}
               seconds={seconds}
               setSeconds={setSeconds}
               score={score}
               setScore={setScore}
-              difficulty={item.difficulty}
-              type={item.type}
             />
           }}
         />
