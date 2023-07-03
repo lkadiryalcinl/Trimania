@@ -7,6 +7,7 @@ import {
 
 import React,
 {
+  useContext,
   useEffect
 } from 'react'
 
@@ -15,10 +16,12 @@ import Button from '../components/CustomButton'
 import Lottie from 'lottie-react-native'
 
 import { setUserScore } from '../firebase/UserTransactions'
+import { Context } from '../context/Context'
 
 const Results = ({navigation,route}) => {
-  const {score,user} = route.params
-  
+  const {score} = route.params
+  const {user} = useContext(Context)
+
   useEffect(() => {
     if(user.score){
       if(score > user.score)

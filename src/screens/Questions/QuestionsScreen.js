@@ -12,7 +12,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Question from './Question'
 
 const QuestionsScreen = ({ navigation, route }) => {
-  const { data, user, amountSize } = route.params
+  const { data,amountSize } = route.params
   const [seconds, setSeconds] = useState(12);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -31,7 +31,7 @@ const QuestionsScreen = ({ navigation, route }) => {
     } else {
       setSeconds(12)
       if (index === +amountSize - 1 && isFocused) { // Check if screen is focused
-        navigation.navigate('Results', { score, user });
+        navigation.navigate('Results', { score});
         setIndex(null)
         setScore(0)
         flatListRef.current.scrollToIndex({ animated: true, index });

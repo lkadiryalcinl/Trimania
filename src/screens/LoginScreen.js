@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
       style={{ flex: 1 }}
     >
       <View style={styles.top_container}>
-        <Image source={require('../assets/images/Trimania.png')} style={styles.image} />
+        <Image source={require('../assets/images/Trimania_Logo.png')} style={styles.image} />
       </View>
       <View style={styles.bottom_container}>
         <Formik
@@ -74,6 +74,7 @@ const LoginScreen = ({ navigation }) => {
           )}
         </Formik>
       </View>
+      <View style={styles.providers}/>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Register')}><Text style={styles.text}>Don't have an account yet?</Text></TouchableOpacity>
     </ImageBackground>
   )
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg
   },
   top_container: {
-    flex: 2,
+    flex: 3,
     justifyContent: 'center',
   },
   bottom_container: {
@@ -104,13 +105,13 @@ const styles = StyleSheet.create({
     width: screen.width / 1.15,
     height: screen.height / 4,
     resizeMode: 'contain',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   text_container: {
     padding: 4,
+    position: 'absolute',
     alignSelf: 'center',
-    flex:1,
-    justifyContent:'flex-end'
+    bottom:0
   },
   text: {
     fontSize: 18,
@@ -131,5 +132,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignSelf:'center',
     marginTop:8
+  },
+  providers:{
+    flex:1
   }
 })

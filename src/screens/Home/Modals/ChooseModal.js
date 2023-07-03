@@ -6,7 +6,7 @@ import Button from '../../../components/CustomButton'
 import { categories, difficulties, questionTypes, amounts } from '../../../utils/modalData';
 import colors from '../../../utils/colors';
 
-const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
+const ChooseModal = ({ modalVisible, setModalVisible, navigation}) => {
     const [category, setCategory] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
     const [questionType, setQuestionType] = useState(null);
@@ -37,7 +37,6 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation, user }) => {
                 } else {
                     navigation.navigate('Questions', {
                         data: data.results,
-                        user,
                         amountSize
                     });
                 }
