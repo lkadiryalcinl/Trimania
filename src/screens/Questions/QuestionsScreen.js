@@ -4,7 +4,6 @@ import {
   FlatList,
   Alert,
   BackHandler,
-  ImageBackground
 } from 'react-native'
 
 import LinearGradient from 'react-native-linear-gradient';

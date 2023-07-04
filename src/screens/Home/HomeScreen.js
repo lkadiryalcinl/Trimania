@@ -131,7 +131,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.bottom_container}>
         <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setModalVisible2(!modalVisible2)} additionalStyles={styles.additionalStyles}/>
       </View>
-      <ChooseModal modalVisible={modalVisible2} setModalVisible={setModalVisible2} navigation={navigation} user={user} />
+      <ChooseModal modalVisible={modalVisible2} setModalVisible={setModalVisible2}/>
     </LinearGradient>
   )
 }

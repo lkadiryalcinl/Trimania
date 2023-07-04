@@ -29,6 +29,11 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
     setWrongIndex(null)
   }, [correct_answer,incorrect_answers]);
 
+  useEffect(() => {
+    if(seconds === 12)
+      setDisableButtons(false)
+  },[seconds])
+
   const handleButtonPress = (item, id) => {
     setDisableButtons(true)
     setSeconds(1)
@@ -53,7 +58,6 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
         else
           setScore(score + 20)
       }
-      setDisableButtons(false)
     }
     else {
       setWrongIndex(id)
@@ -75,7 +79,6 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
         else
           setScore(score - 10)
       }
-      setDisableButtons(false)
     }
     
   }

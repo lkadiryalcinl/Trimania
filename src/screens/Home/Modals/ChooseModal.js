@@ -5,13 +5,16 @@ import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../../components/CustomButton'
 import { categories, difficulties, questionTypes, amounts } from '../../../utils/modalData';
 import colors from '../../../utils/colors';
+import { useNavigation } from '@react-navigation/native';
 
-const ChooseModal = ({ modalVisible, setModalVisible, navigation }) => {
+const ChooseModal = ({ modalVisible, setModalVisible }) => {
     const [category, setCategory] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
     const [questionType, setQuestionType] = useState(null);
     const [amount, setAmount] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const navigation = useNavigation()
 
     const toggleModal = () => setModalVisible(!modalVisible)
 
@@ -19,7 +22,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation }) => {
         setLoading(true)
         if (!category || !difficulty || !questionType || !amount) {
             Alert.alert("Error", "Please fill in all options.");
-            setDisabled(false)
+            setLoading(false)
             return;
         }
         const categoryID = category.value;

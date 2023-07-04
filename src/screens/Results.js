@@ -22,7 +22,9 @@ import { Context } from '../context/Context'
 
 const Results = ({ navigation, route }) => {
   const { score } = route.params
-  const { user } = useContext(Context)
+  const { currUser:user } = useContext(Context)
+
+  console.log(user,typeof(user));
 
   useEffect(() => {
     if (user.score) {
