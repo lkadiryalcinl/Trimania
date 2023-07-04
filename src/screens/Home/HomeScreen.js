@@ -115,8 +115,8 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
 
             <View style={styles.text_container}>
-              <Text style={styles.text}>Are you ready? {user ? user.username : ''}</Text>
-              <Text style={styles.text}>Your current rank is : {userRank ? userRank : 'Not exist'}</Text>
+              <Text style={styles.text}>Are you ready? <Text style={[styles.text,{color:colors.ac}]}>{user ? user.username : ''}</Text></Text>
+              <Text style={styles.text}>Your current rank is : <Text style={[styles.text,{color:colors.ac}]}>{userRank ? userRank : 'Not exist'}</Text></Text>
             </View>
           </>
 
