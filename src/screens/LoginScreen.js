@@ -5,13 +5,14 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ImageBackground,
 } from 'react-native'
 
 import
 React, {
   useContext,
 } from 'react'
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import Button from '../components/CustomButton'
 import Input from '../components/CustomInput'
@@ -27,10 +28,11 @@ const LoginScreen = ({ navigation }) => {
   const{loading,setLoading} = useContext(Context)
 
   return (
-    <ImageBackground
-      source={require('../assets/images/purple-blue-bg.jpg')}
-      resizeMode="cover"
-      style={{ flex: 1 }}
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={[colors.bg, colors.bg2]}
+      style={styles.container}
     >
       <View style={styles.top_container}>
         <Image source={require('../assets/images/Trimania_Logo.png')} style={styles.image} />
@@ -76,17 +78,17 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={styles.providers}/>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Register')}><Text style={styles.text}>Don't have an account yet?</Text></TouchableOpacity>
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 
 export default LoginScreen
 
 const screen = Dimensions.get('screen')
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg
   },
   top_container: {
     flex: 3,

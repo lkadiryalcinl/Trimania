@@ -7,6 +7,8 @@ import {
   ImageBackground
 } from 'react-native'
 
+import LinearGradient from 'react-native-linear-gradient';
+
 import { useIsFocused } from '@react-navigation/native';
 import React, { useState, useEffect, useRef } from 'react'
 import Question from './Question'
@@ -93,10 +95,11 @@ const QuestionsScreen = ({ navigation, route }) => {
   }
 
   return (
-    <ImageBackground
+    <LinearGradient
       style={styles.outer_container}
-      source={require('../../assets/images/purple-blue-bg.jpg')}
-      resizeMode='cover'
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={[colors.bg, colors.bg2]}
     >
       <View style={styles.swiper_container}>
         <FlatList
@@ -112,7 +115,7 @@ const QuestionsScreen = ({ navigation, route }) => {
       <View style={styles.ad}>
 
       </View>
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 

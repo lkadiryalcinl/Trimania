@@ -4,12 +4,13 @@ import {
   Text, 
   TouchableOpacity, 
   View,
-  ImageBackground,
 } from 'react-native'
 
 import React,{
   useContext,
 } from 'react'
+
+import LinearGradient from 'react-native-linear-gradient';
 
 import Button from '../components/CustomButton'
 import Input from '../components/CustomInput'
@@ -26,9 +27,10 @@ const RegisterScreen = ({ navigation }) => {
   const {loading,setLoading} = useContext(Context)
 
   return (
-    <ImageBackground
-      source={require('../assets/images/purple-blue-bg.jpg')}
-      resizeMode="cover"
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={[colors.bg, colors.bg2]}
       style={styles.container}
     >
       <View style={styles.top_container}>
@@ -89,7 +91,7 @@ const RegisterScreen = ({ navigation }) => {
         </Formik>
       </View>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Login')}><Text style={styles.text}>Already have an account ?</Text></TouchableOpacity>
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 
@@ -98,6 +100,7 @@ export default RegisterScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:colors.bg2
   },
   top_container: {
     flex: 3,

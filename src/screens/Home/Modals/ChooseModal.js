@@ -6,12 +6,12 @@ import Button from '../../../components/CustomButton'
 import { categories, difficulties, questionTypes, amounts } from '../../../utils/modalData';
 import colors from '../../../utils/colors';
 
-const ChooseModal = ({ modalVisible, setModalVisible, navigation}) => {
+const ChooseModal = ({ modalVisible, setModalVisible, navigation }) => {
     const [category, setCategory] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
     const [questionType, setQuestionType] = useState(null);
     const [amount, setAmount] = useState(null);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const toggleModal = () => setModalVisible(!modalVisible)
 
@@ -33,7 +33,7 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation}) => {
             .then(response => response.json())
             .then(data => {
                 if (data.results.length == 0) {
-                    Alert.alert('Soon','will be with you very soon...')
+                    Alert.alert('Soon', 'will be with you very soon...')
                 } else {
                     navigation.navigate('Questions', {
                         data: data.results,
@@ -41,9 +41,13 @@ const ChooseModal = ({ modalVisible, setModalVisible, navigation}) => {
                     });
                 }
                 setLoading(false)
+                setModalVisible(false)
             })
-            .catch(error =>
-                Alert.alert('Error', 'An error has occurred, please try again.'),
+            .catch(error =>{
+                Alert.alert('Error', 'An error has occurred, please try again.')
+                setLoading(false)
+                setModalVisible(false)
+            }
             );
     };
 

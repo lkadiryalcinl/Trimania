@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         borderWidth:1,
         borderRadius:50,
-        backgroundColor:colors.bg
+        backgroundColor:colors.fg
     },
     username_container:{
         flex:3,

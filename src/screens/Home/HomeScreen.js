@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   Alert,
   BackHandler,
-  ImageBackground
 } from 'react-native'
 
 import React,
@@ -17,6 +16,8 @@ import React,
   useEffect,
   useState
 } from 'react'
+
+import LinearGradient from 'react-native-linear-gradient'
 
 import auth from '@react-native-firebase/auth'
 
@@ -92,10 +93,11 @@ const HomeScreen = ({ navigation }) => {
 
 
   return (
-    <ImageBackground 
-    style={styles.container}
-    resizeMode='cover'
-    source={require('../../assets/images/purple-blue-bg.jpg')}
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={[colors.bg, colors.bg2]}
+      style={styles.container}
     >
       <TouchableOpacity onPress={signOutControl}>
         <Icon name='logout' color={colors.fg} size={32} style={{ position: 'absolute', right: 16, top: 8 }} />
@@ -130,7 +132,7 @@ const HomeScreen = ({ navigation }) => {
         <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setModalVisible2(!modalVisible2)} additionalStyles={styles.additionalStyles}/>
       </View>
       <ChooseModal modalVisible={modalVisible2} setModalVisible={setModalVisible2} navigation={navigation} user={user} />
-    </ImageBackground>
+    </LinearGradient>
   )
 }
 
@@ -139,6 +141,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:colors.bg2
   },
   top_container: {
     flex: 1,
