@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Dimensions, Alert, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState,useCallback } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../../utils/colors'
 
@@ -11,6 +11,8 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
 
   const [wrongIndex, setWrongIndex] = useState(null);
   const [correctIndex, setCorrectIndex] = useState(null);
+
+  console.log("rendered");
 
   useEffect(() => {
     if (type === 'boolean') {
@@ -34,54 +36,54 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
       setDisableButtons(false)
   },[seconds])
 
-  const handleButtonPress = (item, id) => {
-    setDisableButtons(true)
-    setSeconds(1)
+  
+const handleButtonPress = useCallback((item, id) => {
+  setDisableButtons(true)
+  setSeconds(1)
+  
+  if (item === correct_answer) {
+    setCorrectIndex(id)
+    setWrongIndex(null)
 
-    if (item === correct_answer) {
-      setCorrectIndex(id)
-      setWrongIndex(null)
-
-      if (type === 'boolean') {
-        if (difficulty === 'easy')
-          setScore(score + 6)
-        else if (difficulty === 'medium')
-          setScore(score + 10)
-        else
-          setScore(score + 13)
-      }
-      else {
-        if (difficulty === 'easy')
-          setScore(score + 10)
-        else if (difficulty === 'medium')
-          setScore(score + 15)
-        else
-          setScore(score + 20)
-      }
+    if (type === 'boolean') {
+      if (difficulty === 'easy')
+        setScore(score + 6)
+      else if (difficulty === 'medium')
+        setScore(score + 10)
+      else
+        setScore(score + 13)
     }
     else {
-      setWrongIndex(id)
-      setCorrectIndex(allAnswers.findIndex(element => element == correct_answer))
-
-      if (type === 'boolean') {
-        if (difficulty === 'easy')
-          setScore(score - 3)
-        else if (difficulty === 'medium')
-          setScore(score - 5)
-        else
-          setScore(score - 7)
-      }
-      else {
-        if (difficulty === 'easy')
-          setScore(score - 5)
-        else if (difficulty === 'medium')
-          setScore(score - 8)
-        else
-          setScore(score - 10)
-      }
+      if (difficulty === 'easy')
+        setScore(score + 10)
+      else if (difficulty === 'medium')
+        setScore(score + 15)
+      else
+        setScore(score + 20)
     }
-    
   }
+  else {
+    setWrongIndex(id)
+    setCorrectIndex(allAnswers.findIndex(element => element == correct_answer))
+
+    if (type === 'boolean') {
+      if (difficulty === 'easy')
+        setScore(score - 3)
+      else if (difficulty === 'medium')
+        setScore(score - 5)
+      else
+        setScore(score - 7)
+    }
+    else {
+      if (difficulty === 'easy')
+        setScore(score - 5)
+      else if (difficulty === 'medium')
+        setScore(score - 8)
+      else
+        setScore(score - 10)
+    }
+  }
+}, [correct_answer, incorrect_answers, difficulty, score, setScore, setSeconds]);
 
   const formattedCategory = decodeURIComponent(category)
   const formattedQuestion = decodeURIComponent(question)

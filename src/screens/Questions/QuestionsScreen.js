@@ -6,11 +6,20 @@ import {
   BackHandler,
 } from 'react-native'
 
+import React,
+{
+  useState,
+  useEffect,
+  useRef,
+  useCallback
+} from 'react'
+
 import LinearGradient from 'react-native-linear-gradient';
 
 import { useIsFocused } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react'
 import Question from './Question'
+
+console.log("rendered");
 
 const QuestionsScreen = ({ navigation, route }) => {
   const { data,amountSize } = route.params
@@ -80,7 +89,7 @@ const QuestionsScreen = ({ navigation, route }) => {
     return () => backHandler.remove();
   }, []);
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = useCallback(({ item, index }) => {
     return (
       <Question
         item={item}
@@ -91,7 +100,7 @@ const QuestionsScreen = ({ navigation, route }) => {
         setScore={setScore}
       />
     )
-  }
+}, [seconds, score]);
 
   return (
     <LinearGradient
