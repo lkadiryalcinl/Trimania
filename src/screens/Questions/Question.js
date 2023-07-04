@@ -114,7 +114,7 @@ const handleButtonPress = useCallback((item, id) => {
             <TouchableOpacity
               style={[
                 styles.button,
-                index === correctIndex ? { borderWidth: 2, borderColor: 'green' } : index === wrongIndex ? { borderWidth: 2, borderColor: 'red' } : { borderWidth: 2, borderColor: '#D4D4D4' }
+                index === correctIndex ? { backgroundColor:colors.correct } : index === wrongIndex ? { backgroundColor: colors.warn } : null
               ]}
               key={index}
               onPress={() => handleButtonPress(item, index)}

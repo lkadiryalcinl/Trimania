@@ -4,5 +4,6 @@ export default colors =  {
     fg:'#FFFFFF',
     ac:'#800080',
     black:'#000000',
-    warn:'#FF0000'
+    warn:'#FF0000',
+    correct:'#00FF00'
 }
