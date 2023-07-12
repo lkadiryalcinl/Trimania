@@ -1,40 +1,26 @@
-import { StyleSheet, Text, View,Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { Dimensions } from 'react-native'
-import colors from '../../utils/colors'
-import getAvatar from '../../utils/getAvatar'
-import findUserRank from '../../firebase/findUserRank'
+import { StyleSheet,Dimensions, Text, View,Image } from 'react-native'
+import React, { useContext } from 'react'
+import colors from '../../../utils/colors'
+import getAvatar from '../../../utils/getAvatar'
+import { Context } from '../../../context/Context'
 
-const LeaderBoardCard = ({id,icon,username,score}) => {
-  const [userRank,setUserRank] = useState(0)
-  const [control,setControl] = useState(false)
-  
-  useEffect(() => {
-    const handleChange = async() => {
-      setUserRank(await findUserRank())
-      if(userRank === id) {
-        setControl(true)
-      }
-      else{
-        setControl(false)
-      }
-    }
-    handleChange()
-  },[userRank])
+const LeaderBoardCard = ({id,icon,username,score,userID}) => {  
+  const { currUser:user } = useContext(Context)
+  const isActiveUser = user?.userID === userID;
 
-  return ( 
-    <View style={control?styles.active_container:styles.container}>
+ return ( 
+    <View style={isActiveUser ? styles.active_container : styles.container}>
       <View style={styles.index_container}>
-        <Text style={control?styles.active_text:styles.text}>{id}</Text>
+        <Text style={isActiveUser ? styles.active_text : styles.text}>{id}</Text>
       </View>
       <View style={styles.icon_container}>
-        <Image source={getAvatar(icon)} style={styles.image}/>
+        <Image source={getAvatar(isActiveUser ? user.icon : icon)} style={styles.image}/>
       </View>
       <View style={styles.username_container}>
-        <Text style={control?styles.active_text:styles.text}>{username}</Text>
+        <Text style={isActiveUser ? styles.active_text : styles.text}>{isActiveUser ? user.username : username}</Text>
       </View>
       <View style={styles.score_container}>
-        <Text style={control?styles.active_text:styles.text}>{score}</Text>
+        <Text style={isActiveUser ? styles.active_text : styles.text}>{score}</Text>
       </View>
     </View>
   )
@@ -46,7 +32,8 @@ const styles = StyleSheet.create({
     container:{
         height:Dimensions.get('screen').height/12,	
         backgroundColor:'#D4D4D4',
-        margin:5,
+        margin:6,
+        marginHorizontal:12,
         borderRadius:5,
         flexDirection:'row',
         paddingVertical:5
@@ -54,7 +41,7 @@ const styles = StyleSheet.create({
     active_container:{
       height:Dimensions.get('screen').height/12,	
         backgroundColor:colors.ac,
-        margin:5,
+        margin:6,
         borderRadius:5,
         flexDirection:'row',
         paddingVertical:5
@@ -71,7 +58,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         borderWidth:1,
         borderRadius:50,
-        backgroundColor:colors.bg
+        backgroundColor:colors.fg
     },
     username_container:{
         flex:3,

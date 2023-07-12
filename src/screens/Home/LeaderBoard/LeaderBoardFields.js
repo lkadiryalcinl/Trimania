@@ -1,6 +1,8 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import colors from '../../utils/colors'
+import colors from '../../../utils/colors'
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const LeaderBoardFields = () => {
     return (
@@ -15,7 +17,7 @@ const LeaderBoardFields = () => {
                 <Text style={styles.text}>Username</Text>
             </View>
             <View style={styles.score}>
-                <Text style={styles.text}>Score</Text>
+                <Icon name='crown' size={24} color={'gold'}/>
             </View>
         </View>
     )
@@ -36,7 +38,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        alignItems:'center'
+        alignItems:'center',
+        marginLeft:4
     },
     username: {
         flex: 3,
@@ -44,7 +47,8 @@ const styles = StyleSheet.create({
     },
     score: {
         flex: 1,
-        alignItems:'center'
+        alignItems:'center',
+        marginRight:4
     },
     text:{
         fontSize:18,
