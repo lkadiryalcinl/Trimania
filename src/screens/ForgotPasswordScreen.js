@@ -4,6 +4,8 @@ import { Dimensions, StyleSheet, ImageBackground, Alert,View,Text } from 'react-
 import Input from '../components/CustomInput'
 import Button from '../components/CustomButton'
 
+import LinearGradient from 'react-native-linear-gradient'
+
 import {forgotPassword} from '../firebase/AuthTransactions'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
@@ -29,9 +31,11 @@ const ForgotPasswordScreen = () => {
     }
     
     return (
-        <ImageBackground
+        <LinearGradient
             style={styles.container}
-            source={require('../assets/images/purple-blue-bg.jpg')}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            colors={[colors.bg, colors.bg2]}
         >
             <Formik
                 initialValues={{ email: '' }}
@@ -66,7 +70,7 @@ const ForgotPasswordScreen = () => {
                 )}
             </Formik>
 
-        </ImageBackground>
+        </LinearGradient>
     )
 }
 

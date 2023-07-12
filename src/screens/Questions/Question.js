@@ -12,8 +12,6 @@ const Question = ({item, index, seconds, setSeconds, score, setScore }) => {
   const [wrongIndex, setWrongIndex] = useState(null);
   const [correctIndex, setCorrectIndex] = useState(null);
 
-  console.log("rendered");
-
   useEffect(() => {
     if (type === 'boolean') {
       setAllAnswers(['True', 'False']);

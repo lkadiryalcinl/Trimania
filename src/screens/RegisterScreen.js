@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   bottom:{
-    flex:2,
+    flex:1,
     marginTop:32
   },
   text_container: {

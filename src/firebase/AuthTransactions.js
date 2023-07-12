@@ -1,11 +1,12 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import { Linking,Alert } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import {getFirebaseAuthErrorMessage,getFirebaseFirestoreErrorMessage} from './error'
-import { useContext } from 'react'
-import { Context } from '../context/Context'
 
-const createUser = async (data,setLoading) => {
+
+
+export const createUser = async (data,setLoading) => {
     try {
         setLoading(true)
         await auth().createUserWithEmailAndPassword(data.email, data.password)
@@ -18,7 +19,6 @@ const createUser = async (data,setLoading) => {
                 });
                 setLoading(false)
             })
-
     } catch (err) {
         let message = '';
         if (err.code && err.code.startsWith('auth/')) {  // err.code var olduğunu kontrol ediyoruz
@@ -37,7 +37,7 @@ const createUser = async (data,setLoading) => {
     }
 }
 
-const forgotPassword = async function forgotPassword(email) {
+export const forgotPassword = async function forgotPassword(email) {
     try {
         await auth().sendPasswordResetEmail(email);
     } catch (error) {
@@ -45,7 +45,7 @@ const forgotPassword = async function forgotPassword(email) {
     }
 }
 
-const signInUser = (data,setLoading) => {
+export const signInUser = (data,setLoading) => {
     try {
         setLoading(true)
         auth()
@@ -69,10 +69,4 @@ const signInUser = (data,setLoading) => {
         })
         setLoading(false)
     }
-}
-
-export {
-    createUser,
-    forgotPassword,
-    signInUser
 }

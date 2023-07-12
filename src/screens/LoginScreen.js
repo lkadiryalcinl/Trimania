@@ -20,12 +20,15 @@ import Input from '../components/CustomInput'
 import colors from '../utils/colors'
 import { Formik } from 'formik'
 
-import {signInUser} from '../firebase/AuthTransactions'
+import { signInUser } from '../firebase/AuthTransactions'
 import { signInValidationSchema } from '../utils/validations'
 import { Context } from '../context/Context'
 
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { signInWithGoogle } from '../firebase/SocialAuth';
+
 const LoginScreen = ({ navigation }) => {
-  const{loading,setLoading} = useContext(Context)
+  const { loading, setLoading } = useContext(Context)
 
   return (
     <LinearGradient
@@ -41,7 +44,7 @@ const LoginScreen = ({ navigation }) => {
         <Formik
           initialValues={{ email: '', password: '', }}
           validationSchema={signInValidationSchema}
-          onSubmit={(values) => signInUser(values,setLoading)}
+          onSubmit={(values) => signInUser(values, setLoading)}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <>
@@ -71,12 +74,12 @@ const LoginScreen = ({ navigation }) => {
                 <Button onPress={handleSubmit} label='Login' icon={{ name: 'login', size: 24, color: colors.fg }} additionalStyles={styles.additionalStyles} loading={loading} disabled={loading} />
                 <TouchableOpacity style={styles.button_below} onPress={() => navigation.navigate('ForgotPassword')}><Text style={styles.text}>Reset password</Text></TouchableOpacity>
               </View>
-
             </>
           )}
         </Formik>
       </View>
-      <View style={styles.providers}/>
+      <View style={styles.providers}>
+      </View>
       <TouchableOpacity style={styles.text_container} onPress={() => navigation.navigate('Register')}><Text style={styles.text}>Don't have an account yet?</Text></TouchableOpacity>
     </LinearGradient>
   )
@@ -113,11 +116,11 @@ const styles = StyleSheet.create({
     padding: 4,
     position: 'absolute',
     alignSelf: 'center',
-    bottom:0
+    bottom: 0
   },
   text: {
     fontSize: 18,
-    color: colors.fg
+    color: colors.fg,
   },
   error: {
     fontSize: 16,
@@ -125,17 +128,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 24
   },
-  additionalStyles:{
+  additionalStyles: {
     inner_container: {
-      marginHorizontal:screen.width/4
+      marginHorizontal: screen.width / 4
     }
   },
-  button_below:{
-    justifyContent:'center',
-    alignSelf:'center',
-    marginTop:8
+  button_below: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 8,
   },
-  providers:{
-    flex:1
+  providers: {
+    flex: 1,
   }
 })

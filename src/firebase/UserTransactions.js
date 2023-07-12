@@ -53,6 +53,7 @@ const updateIcon = async(newIconValue) => {
     })
 }
 
+
 export {
     findUserById,
     setUserScore,

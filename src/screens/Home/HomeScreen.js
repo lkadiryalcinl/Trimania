@@ -32,13 +32,13 @@ import ChangeIcon from './Modals/changeIcon'
 import ChooseModal from './Modals/ChooseModal'
 import { Context } from '../../context/Context'
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const {currUser:user,setCurrUser:setUser} = useContext(Context)
 
   const [loading, setLoading] = useState(true);  // loading state'i default olarak true ayarlandı.
   const [userRank, setUserRank] = useState();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
+  const [changeIcon, setChangeIcon] = useState(false);
+  const [chooseModal, setChooseModal] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -52,6 +52,8 @@ const HomeScreen = ({ navigation }) => {
     fetchUserData();
 
   }, [userRank]);
+
+  
 
   const signOutControl = () =>
     Alert.alert(
@@ -108,10 +110,10 @@ const HomeScreen = ({ navigation }) => {
           ? <ActivityIndicator size={32} style={styles.indicator} color={colors.ac} />
           :
           <>
-            <TouchableOpacity style={styles.icon_container} onPress={() => { setModalVisible(!modalVisible) }}>
+            <TouchableOpacity style={styles.icon_container} onPress={() => { setChangeIcon(!changeIcon) }}>
               <Image source={user ? getAvatar(user.icon) : require('../../assets/Avatars/Avatar1.png')} style={styles.image} />
               <Icon name='edit' color={'white'} size={24} style={styles.icon_style} />
-              <ChangeIcon modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={navigation} />
+              <ChangeIcon modalVisible={changeIcon} setModalVisible={setChangeIcon}/>
             </TouchableOpacity>
 
             <View style={styles.text_container}>
@@ -129,9 +131,9 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.bottom_container}>
-        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setModalVisible2(!modalVisible2)} additionalStyles={styles.additionalStyles}/>
+        <Button label={'Start Game'} icon={{ name: 'right', size: 24, color: colors.fg }} onPress={() => setChooseModal(!chooseModal)} additionalStyles={styles.additionalStyles}/>
       </View>
-      <ChooseModal modalVisible={modalVisible2} setModalVisible={setModalVisible2}/>
+      <ChooseModal modalVisible={chooseModal} setModalVisible={setChooseModal}/>
     </LinearGradient>
   )
 }
