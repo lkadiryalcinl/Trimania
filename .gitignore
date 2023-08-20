@@ -72,4 +72,4 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-/android
+android/
