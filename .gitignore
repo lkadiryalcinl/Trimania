@@ -40,6 +40,8 @@ build/
 /captures
 google-services.json
 .env
+build.gradle
+debug.keystore
 
 # node.js
 #
