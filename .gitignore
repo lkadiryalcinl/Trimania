@@ -40,8 +40,11 @@ build/
 /captures
 google-services.json
 .env
-build.gradle
 debug.keystore
+
+android/app/build.gradle
+android/build.gradle
+
 
 # node.js
 #
