@@ -1,12 +1,12 @@
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import { Linking,Alert } from 'react-native'
+import { Linking, Alert } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
-import {getFirebaseAuthErrorMessage,getFirebaseFirestoreErrorMessage} from './error'
+import { getFirebaseAuthErrorMessage, getFirebaseFirestoreErrorMessage } from './error'
 
 
 
-export const createUser = async (data,setLoading) => {
+export const createUser = async (data, setLoading) => {
     try {
         setLoading(true)
         await auth().createUserWithEmailAndPassword(data.email, data.password)
@@ -33,7 +33,7 @@ export const createUser = async (data,setLoading) => {
             message,
             type: 'warning'
         })
-        setLoading(false)
+        setLoading(false) 
     }
 }
 
@@ -45,7 +45,7 @@ export const forgotPassword = async function forgotPassword(email) {
     }
 }
 
-export const signInUser = (data,setLoading) => {
+export const signInUser = (data, setLoading) => {
     try {
         setLoading(true)
         auth()
